@@ -54,6 +54,9 @@ e2 = np.zeros((L + 1, 1))
 e3 = np.zeros((L + 1, 1))
 e4 = np.zeros((L + 1, 1))
 
+w5 = np.zeros((L, 1))
+w6 = np.zeros((L, 1))
+
 si1 = np.zeros((L, 1))
 si2 = np.zeros((L, 1))
 si3 = np.zeros((L, 1))
@@ -63,6 +66,9 @@ ss1= np.zeros((L, 1))
 ss2= np.zeros((L, 1))
 ss3= np.zeros((L, 1))
 ss4= np.zeros((L, 1))
+
+
+
 
 
 # Simulation loop
