@@ -67,4 +67,6 @@ ss4= np.zeros((L, 1))
 
 # Simulation loop
 
+for k in range (1, L-1):
+    
 
