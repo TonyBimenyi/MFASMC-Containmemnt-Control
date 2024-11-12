@@ -68,6 +68,16 @@ ss3= np.zeros((L, 1))
 ss4= np.zeros((L, 1))
 
 
+# Set w5 and w6 according to conditions
+w5[:165] = 1.4
+w5[165:330] = 1.6
+w5[330:] = 1.3
+
+w6[:165] = 0.7
+w6[165:330] = 1.2
+w6[330:] = 1.1
+
+
 
 
 
