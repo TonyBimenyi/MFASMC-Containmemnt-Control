@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 beta = -0.2
 rho = 1
 eta = 1
-lamda = 50
+lambda_ = 50
 mu = 1
 epsilon = 10**-5
 alpha1 = 1
@@ -99,4 +99,23 @@ for k in range (1, L-1):
         phi2[k] = phi2[k - 1] + (eta * (u2[k - 1] - u2[k - 2]) / (mu + (abs(u2[k - 1] - u2[k - 2]))**2)) * (y2[k] - y2[k - 1] - phi2[k - 1] * (u2[k - 1] - u2[k - 2]))
         phi3[k] = phi3[k - 1] + (eta * (u3[k - 1] - u3[k - 2]) / (mu + (abs(u3[k - 1] - u3[k - 2]))**2)) * (y3[k] - y3[k - 1] - phi3[k - 1] * (u3[k - 1] - u3[k - 2]))
         phi4[k] = phi4[k - 1] + (eta * (u4[k - 1] - u4[k - 2]) / (mu + (abs(u4[k - 1] - u4[k - 2]))**2)) * (y4[k] - y4[k - 1] - phi4[k - 1] * (u4[k - 1] - u4[k - 2]))
+
+
+    si1[k] = y2[k] - 2 * y1[k] + w5[k]
+    si2[k] = y3[k] - y2[k]
+    si3[k] = y4[k] - 2 * y3[k] + y1[k]
+    si4[k] = y2[k] - 2 * y4[k] + w6[k]
+
+
+    if k == 1:
+            u1[1] = 0
+            u2[1] = 0
+            u3[1] = 0
+            u4[1] = 0
+    else:
+        u1[k] = u1[k - 1] + (rho * phi1[k]) / (lambda_ + abs(phi1[k])**2) * si1[k]
+        u2[k] = u2[k - 1] + (rho * phi2[k]) / (lambda_ + abs(phi2[k])**2) * si2[k]
+        u3[k] = u3[k - 1] + (rho * phi3[k]) / (lambda_ + abs(phi3[k])**2) * si3[k]
+        u4[k] = u4[k - 1] + (rho * phi4[k]) / (lambda_ + abs(phi4[k])**2) * si4[k]
+
 
