@@ -20,3 +20,8 @@ rT = 1024
 m = 350
 L = 100
 
+# Generate constant desired trajectory
+yd = 0.5 * (1 + np.sign(np.sin(np.linspace(0, 2 * np.pi, L + 1))))  # Square wave
+
+
+
