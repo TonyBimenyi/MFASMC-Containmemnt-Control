@@ -59,4 +59,9 @@ si2 = np.zeros((L, 1))
 si3 = np.zeros((L, 1))
 si4 = np.zeros((L, 1))
 
+ss1= np.zeros((L, 1))
+ss2= np.zeros((L, 1))
+ss3= np.zeros((L, 1))
+ss4= np.zeros((L, 1))
+
 
