@@ -65,3 +65,6 @@ ss3= np.zeros((L, 1))
 ss4= np.zeros((L, 1))
 
 
+# Simulation loop
+
+
