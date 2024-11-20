@@ -18,7 +18,7 @@ gamma3 = 0.45
 gamma4 = 0.45
 rT = 1024
 m = 350
-L = 100
+L = 200
 
 # Generate constant desired trajectory
 yd = 0.5 * (1 + np.sign(np.sin(np.linspace(0, 2 * np.pi, L + 1))))  # Square wave
@@ -84,11 +84,11 @@ w6[330:] = 1.1
 # Simulation loop
 
 for k in range (1, L-1):
-    if k == 0:
-        phi1[0] = 1
-        phi2[0] = 1
-        phi3[0] = 1
-        phi4[0] = 1
+    if k == 1:
+        phi1[1] = 1
+        phi2[1] = 1
+        phi3[1] = 1
+        phi4[1] = 1
     elif k == 1:
         phi1[k] = phi1[k - 1] + eta * u1[k - 1] / (mu + u1[k - 1]**2) * (y1[k] - y1[k - 1] - phi1[k - 1] * u1[k - 1])
         phi2[k] = phi2[k - 1] + eta * u2[k - 1] / (mu + u2[k - 1]**2) * (y2[k] - y2[k - 1] - phi2[k - 1] * u2[k - 1])
@@ -125,12 +125,7 @@ for k in range (1, L-1):
         mfa3[k] = mfa3[k - 1] + (rho * phi3[k]) / (lambda_ + abs(phi3[k])**2) * si3[k]
         mfa4[k] = mfa4[k - 1] + (rho * phi4[k]) / (lambda_ + abs(phi4[k])**2) * si4[k]
 
-    if k == 1:
-        ss1[1] = 0
-        ss2[1] = 0
-        ss3[1] = 0
-        ss4[1] = 0
-    else:
+   
         ss1[k+1] = si1[k+1] + alpha1 * si1[k]
         ss2[k+1] = si2[k+1] + alpha1 * si2[k]
         ss3[k+1] = si3[k+1] + alpha1 * si3[k]
@@ -145,9 +140,9 @@ for k in range (1, L-1):
         sm4[0] = 0
     else:
         sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
-        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
-        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
-        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+        sm2[k] = sm2[k-1] + (ss2[k]-alpha1*si2[k]-epsilon*T*np.sign(ss2[k])-si2[k]) / (phi2[k])
+        sm3[k] = sm3[k-1] + (ss3[k]-alpha1*si3[k]-epsilon*T*np.sign(ss3[k])-si3[k]) / (phi3[k])
+        sm4[k] = sm4[k-1] + (ss4[k]-alpha1*si4[k]-epsilon*T*np.sign(ss4[k])-si4[k]) / (phi4[k])
 
     
     if k == 1:
