@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 #Defining Parameters
 
-beta = -0.2
+beta = -2
 rho = 1
 eta = 40
 lambda_ = 10
@@ -145,10 +145,15 @@ for k in range (1, L-1):
         sm3[1] = 0
         sm4[1] = 0
     else:
-        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
-        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
-        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
-        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+        # sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+        # sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+        # sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+        # sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+
+        sm1[k] = sm1[k-1] + (-beta * si1[k] - epsilon * T * np.sign(ss1[k])-alpha1 * si1[k] - si1[k]) / (phi1[k])
+        sm2[k] = sm2[k-1] + (-beta * si2[k] - epsilon * T * np.sign(ss2[k])-alpha1 * si2[k] - si2[k]) / (phi2[k])
+        sm3[k] = sm3[k-1] + (-beta * si3[k] - epsilon * T * np.sign(ss3[k])-alpha1 * si3[k] - si3[k]) / (phi3[k])
+        sm4[k] = sm4[k-1] + (-beta * si4[k] - epsilon * T * np.sign(ss4[k])-alpha1 * si4[k] - si4[k]) / (phi4[k])
 
     
     if k == 1:
