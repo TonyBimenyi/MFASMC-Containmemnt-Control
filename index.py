@@ -131,7 +131,11 @@ for k in range (1, L-1):
         ss3[1] = 0
         ss4[1] = 0
     else:
-        
+        ss1[k+1] = si1[k+1] + alpha1 * si1[k]
+        ss2[k+1] = si2[k+1] + alpha1 * si2[k]
+        ss3[k+1] = si3[k+1] + alpha1 * si3[k]
+        ss4[k+1] = si4[k+1] + alpha1 * si4[k]
+
 
 
     if k == 1:
