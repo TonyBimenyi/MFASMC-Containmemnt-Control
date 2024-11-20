@@ -107,15 +107,71 @@ for k in range (1, L-1):
     si4[k] = y2[k] - 2 * y4[k] + w6[k]
 
 
+
+    # ss1[k] = si1[k] + alpha1*si1[k-1] + alpha2*np.sign(si1[k-1])
+    # ss2[k] = si2[k] + alpha1*si2[k-1] + alpha2*np.sign(si2[k-1])
+    # ss3[k] = si3[k] + alpha1*si3[k-1] + alpha2*np.sign(si3[k-1])
+    # ss4[k] = si4[k] + alpha1*si4[k-1] + alpha2*np.sign(si4[k-1])
+
+
     if k == 1:
             u1[1] = 0
             u2[1] = 0
             u3[1] = 0
             u4[1] = 0
     else:
-        u1[k] = u1[k - 1] + (rho * phi1[k]) / (lambda_ + abs(phi1[k])**2) * si1[k]
-        u2[k] = u2[k - 1] + (rho * phi2[k]) / (lambda_ + abs(phi2[k])**2) * si2[k]
-        u3[k] = u3[k - 1] + (rho * phi3[k]) / (lambda_ + abs(phi3[k])**2) * si3[k]
-        u4[k] = u4[k - 1] + (rho * phi4[k]) / (lambda_ + abs(phi4[k])**2) * si4[k]
+        mfa1[k] = mfa1[k - 1] + (rho * phi1[k]) / (lambda_ + abs(phi1[k])**2) * si1[k]
+        mfa2[k] = mfa2[k - 1] + (rho * phi2[k]) / (lambda_ + abs(phi2[k])**2) * si2[k]
+        mfa3[k] = mfa3[k - 1] + (rho * phi3[k]) / (lambda_ + abs(phi3[k])**2) * si3[k]
+        mfa4[k] = mfa4[k - 1] + (rho * phi4[k]) / (lambda_ + abs(phi4[k])**2) * si4[k]
+
+
+    if k == 1:
+        sm1[0] = 0
+        sm2[0] = 0
+        sm3[0] = 0
+        sm4[0] = 0
+    else:
+        sm1[k] = sm1[k-1]+1/phi1[k]*(ss1[k]-alpha1*si1[k]-alpha2*np.sign(si1[k])-beta*ss1[k])
+        sm2[k] = sm2[k-1]+1/phi2[k]*(ss2[k]-alpha1*si2[k]-alpha2*np.sign(si2[k])-beta*ss2[k])
+        sm3[k] = sm3[k-1]+1/phi3[k]*(ss3[k]-alpha1*si3[k]-alpha2*np.sign(si3[k])-beta*ss3[k])
+        sm4[k] = sm4[k-1]+1/phi4[k]*(ss4[k]-alpha1*si4[k]-alpha2*np.sign(si4[k])-beta*ss4[k])
+
+    
+    if k == 1:
+        u1[0] = 0.1
+        u2[0] = 0.1
+        u3[0] = 0.1
+        u4[0] = 0.1
+    else:
+        u1[k] = mfa1[k] + gamma1 * sm1[k]
+        u2[k] = mfa2[k] + gamma2 * sm2[k]
+        u3[k] = mfa3[k] + gamma3 * sm3[k]
+        u4[k] = mfa4[k] + gamma4 * sm4[k]
+
+
+
+    y1[0] = 0.1
+    y2[0] = 0.1
+    y3[0] = 0.1
+    y4[0] = 0.1
+    y1[k + 1] = m / (rT * 0.1) * u1[k]
+    y2[k + 1] = m / (rT * 0.1) * u2[k]
+    y3[k + 1] = m / (rT * 0.3) * u3[k]
+    y4[k + 1] = m / (rT * 0.3) * u4[k]
+
+
+
+plt.plot(y1[:-1], '-*r', markersize=4, label='Y1')
+plt.plot(y2[:-1], '-*g', markersize=4, label='Y2')
+plt.plot(y3[:-1], '-*g', markersize=4, label='Y2')
+plt.plot(y4[:-1], '-*g', markersize=4, label='Y2')
+plt.plot(yd[:-1], '-*g', markersize=4, label='Y2')
+plt.plot(w5[:-1], '-*r', markersize=4, label='w5')
+plt.plot(w6[:-1], '-*r', markersize=4, label='w5')
+plt.tight_layout()
+plt.show()
+
+
 
 
