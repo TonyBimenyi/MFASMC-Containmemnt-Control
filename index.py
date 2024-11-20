@@ -144,10 +144,10 @@ for k in range (1, L-1):
         sm3[0] = 0
         sm4[0] = 0
     else:
-        sm1[k] = sm1[k-1]+1/phi1[k]*(ss1[k]-alpha1*si1[k]-alpha2*np.sign(si1[k])-beta*ss1[k])
-        sm2[k] = sm2[k-1]+1/phi2[k]*(ss2[k]-alpha1*si2[k]-alpha2*np.sign(si2[k])-beta*ss2[k])
-        sm3[k] = sm3[k-1]+1/phi3[k]*(ss3[k]-alpha1*si3[k]-alpha2*np.sign(si3[k])-beta*ss3[k])
-        sm4[k] = sm4[k-1]+1/phi4[k]*(ss4[k]-alpha1*si4[k]-alpha2*np.sign(si4[k])-beta*ss4[k])
+        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
 
     
     if k == 1:
