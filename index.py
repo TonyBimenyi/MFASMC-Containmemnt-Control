@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 
 beta = -0.2
 rho = 1
-eta = 1
-lambda_ = 7
+eta = 40
+lambda_ = 10
 mu = 1
 epsilon = 10**-5
 alpha1 = 1
@@ -184,8 +184,8 @@ plt.plot(y2[:-1], '-', markersize=4, label='Y2')
 plt.plot(y3[:-1], '--g', markersize=4, label='Y3')
 plt.plot(y4[:-1], '--b', markersize=4, label='Y4')
 # plt.plot(yd[:-1], '-*g', markersize=4, label='Y2')
-plt.plot(w5[:-1], '-*r', markersize=4, label='w5')
-plt.plot(w6[:-1], '-*r', markersize=4, label='w5')
+plt.plot(w5[:-1], '-*r', markersize=2, label='w5')
+plt.plot(w6[:-1], '-*r', markersize=2, label='w5')
 plt.grid(True)
 plt.xlabel("time step", fontsize=12)
 plt.ylabel("outputs", fontsize=12)
