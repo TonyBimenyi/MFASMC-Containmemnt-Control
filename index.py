@@ -18,7 +18,7 @@ gamma3 = 0.45
 gamma4 = 0.45
 rT = 1024
 m = 350
-L = 100
+L = 500
 
 # Generate constant desired trajectory
 yd = 0.5 * (1 + np.sign(np.sin(np.linspace(0, 2 * np.pi, L + 1))))  # Square wave
@@ -168,6 +168,8 @@ for k in range (1, L-1):
     y2[1] = 0.1
     y3[1] = 0.1
     y4[1] = 0.1
+
+
     y1[k + 1] = m / (rT * 0.1) * u1[k]
     y2[k + 1] = m / (rT * 0.1) * u2[k]
     y3[k + 1] = m / (rT * 0.3) * u3[k]
@@ -175,14 +177,19 @@ for k in range (1, L-1):
 
 
 
-# plt.plot(y1[:-1], '-ok', markersize=4, label='Y1')
-# plt.plot(y2[:-1], '-y', markersize=4, label='Y2')
-# plt.plot(y3[:-1], '-*g', markersize=4, label='Y2')
-# plt.plot(y4[:-1], '--b', markersize=4, label='Y2')
+# plt.figure(figsize=(8, 6))
+
+plt.plot(y1[:-1], '-k', markersize=4, label='Y1')
+plt.plot(y2[:-1], '-', markersize=4, label='Y2')
+plt.plot(y3[:-1], '--g', markersize=4, label='Y3')
+plt.plot(y4[:-1], '--b', markersize=4, label='Y4')
 # plt.plot(yd[:-1], '-*g', markersize=4, label='Y2')
 plt.plot(w5[:-1], '-*r', markersize=4, label='w5')
 plt.plot(w6[:-1], '-*r', markersize=4, label='w5')
-plt.tight_layout()
+plt.grid(True)
+plt.xlabel("time step", fontsize=12)
+plt.ylabel("outputs", fontsize=12)
+plt.legend(fontsize=10)
 plt.show()
 
 
