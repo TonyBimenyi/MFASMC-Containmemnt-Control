@@ -10,7 +10,7 @@ lambda_ = 50
 mu = 1
 epsilon = 10**-5
 alpha1 = 1
-alpha2 = 1.5
+# alpha2 = 1.5
 T = 0.1
 gamma1 = 0.15
 gamma2 = 0.15
@@ -124,6 +124,14 @@ for k in range (1, L-1):
         mfa2[k] = mfa2[k - 1] + (rho * phi2[k]) / (lambda_ + abs(phi2[k])**2) * si2[k]
         mfa3[k] = mfa3[k - 1] + (rho * phi3[k]) / (lambda_ + abs(phi3[k])**2) * si3[k]
         mfa4[k] = mfa4[k - 1] + (rho * phi4[k]) / (lambda_ + abs(phi4[k])**2) * si4[k]
+
+    if k == 1:
+        ss1[1] = 0
+        ss2[1] = 0
+        ss3[1] = 0
+        ss4[1] = 0
+    else:
+        
 
 
     if k == 1:
