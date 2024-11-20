@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 beta = -0.2
 rho = 1
 eta = 1
-lambda_ = 50
+lambda_ = 7
 mu = 1
 epsilon = 10**-5
 alpha1 = 1
@@ -89,7 +89,7 @@ for k in range (1, L-1):
         phi2[1] = 1
         phi3[1] = 1
         phi4[1] = 1
-    elif k == 1:
+    elif k == 2:
         phi1[k] = phi1[k - 1] + eta * u1[k - 1] / (mu + u1[k - 1]**2) * (y1[k] - y1[k - 1] - phi1[k - 1] * u1[k - 1])
         phi2[k] = phi2[k - 1] + eta * u2[k - 1] / (mu + u2[k - 1]**2) * (y2[k] - y2[k - 1] - phi2[k - 1] * u2[k - 1])
         phi3[k] = phi3[k - 1] + eta * u3[k - 1] / (mu + u3[k - 1]**2) * (y3[k] - y3[k - 1] - phi3[k - 1] * u3[k - 1])
@@ -113,6 +113,19 @@ for k in range (1, L-1):
     # ss3[k] = si3[k] + alpha1*si3[k-1] + alpha2*np.sign(si3[k-1])
     # ss4[k] = si4[k] + alpha1*si4[k-1] + alpha2*np.sign(si4[k-1])
 
+    if k == 1:
+        ss1[1] =0
+        ss2[1] =0
+        ss3[1] =0
+        ss4[1] =0
+
+    else:
+        ss1[k+1] = si1[k+1] + alpha1 * si1[k]
+        ss2[k+1] = si2[k+1] + alpha1 * si2[k]
+        ss3[k+1] = si3[k+1] + alpha1 * si3[k]
+        ss4[k+1] = si4[k+1] + alpha1 * si4[k]
+
+
 
     if k == 1:
             u1[1] = 0
@@ -127,22 +140,22 @@ for k in range (1, L-1):
 
 
     if k == 1:
-        sm1[0] = 0
-        sm2[0] = 0
-        sm3[0] = 0
-        sm4[0] = 0
+        sm1[1] = 0
+        sm2[1] = 0
+        sm3[1] = 0
+        sm4[1] = 0
     else:
-        sm1[k] = sm1[k-1]+1/phi1[k]*(ss1[k]-alpha1*si1[k]-alpha2*np.sign(si1[k])-beta*ss1[k])
-        sm2[k] = sm2[k-1]+1/phi2[k]*(ss2[k]-alpha1*si2[k]-alpha2*np.sign(si2[k])-beta*ss2[k])
-        sm3[k] = sm3[k-1]+1/phi3[k]*(ss3[k]-alpha1*si3[k]-alpha2*np.sign(si3[k])-beta*ss3[k])
-        sm4[k] = sm4[k-1]+1/phi4[k]*(ss4[k]-alpha1*si4[k]-alpha2*np.sign(si4[k])-beta*ss4[k])
+        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
 
     
     if k == 1:
-        u1[0] = 0.1
-        u2[0] = 0.1
-        u3[0] = 0.1
-        u4[0] = 0.1
+        u1[1] = 0.1
+        u2[1] = 0.1
+        u3[1] = 0.1
+        u4[1] = 0.1
     else:
         u1[k] = mfa1[k] + gamma1 * sm1[k]
         u2[k] = mfa2[k] + gamma2 * sm2[k]
@@ -151,10 +164,10 @@ for k in range (1, L-1):
 
 
 
-    y1[0] = 0.1
-    y2[0] = 0.1
-    y3[0] = 0.1
-    y4[0] = 0.1
+    y1[1] = 0.1
+    y2[1] = 0.1
+    y3[1] = 0.1
+    y4[1] = 0.1
     y1[k + 1] = m / (rT * 0.1) * u1[k]
     y2[k + 1] = m / (rT * 0.1) * u2[k]
     y3[k + 1] = m / (rT * 0.3) * u3[k]
@@ -162,11 +175,11 @@ for k in range (1, L-1):
 
 
 
-plt.plot(y1[:-1], '-*r', markersize=4, label='Y1')
-plt.plot(y2[:-1], '-*g', markersize=4, label='Y2')
-plt.plot(y3[:-1], '-*g', markersize=4, label='Y2')
-plt.plot(y4[:-1], '-*g', markersize=4, label='Y2')
-plt.plot(yd[:-1], '-*g', markersize=4, label='Y2')
+# plt.plot(y1[:-1], '-ok', markersize=4, label='Y1')
+# plt.plot(y2[:-1], '-y', markersize=4, label='Y2')
+# plt.plot(y3[:-1], '-*g', markersize=4, label='Y2')
+# plt.plot(y4[:-1], '--b', markersize=4, label='Y2')
+# plt.plot(yd[:-1], '-*g', markersize=4, label='Y2')
 plt.plot(w5[:-1], '-*r', markersize=4, label='w5')
 plt.plot(w6[:-1], '-*r', markersize=4, label='w5')
 plt.tight_layout()
