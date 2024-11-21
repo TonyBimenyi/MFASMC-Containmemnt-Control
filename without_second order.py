@@ -6,14 +6,14 @@ import matplotlib.pyplot as plt
 beta = -2
 rho = 1
 eta = 40
-lambda_ = 2
+lambda_ = 10
 mu = 1
 epsilon = 10**-5
 alpha1 = 1
 alpha2 = 1.5
 T = 0.1
-gamma1 = 0.45
-gamma2 = 0.45
+gamma1 = 0.15
+gamma2 = 0.15
 gamma3 = 0.45
 gamma4 = 0.45
 rT = 1024
@@ -76,27 +76,6 @@ w5[330:] = 1.3
 w6[:165] = 0.7
 w6[165:330] = 1.2
 w6[330:] = 1.1
-
-# Define time steps
-# t = np.linspace(0, 2, 500)  # time from 0 to 10 seconds, 1000 points
-
-# # Create a sinusoidal signal
-# amplitude = 1.0  # amplitude of the sine wave
-# frequency = 1.0  # frequency of the sine wave (1 Hz)
-# phase = 0  # phase shift (in radians)
-
-# # Generate upper and lower bounds for sinusoidal wave
-# w5 = amplitude * np.sin(2 * np.pi * frequency * t + phase) + 0.5  # Upper bound with offset
-# w6 = amplitude * np.sin(2 * np.pi * frequency * t + phase) - 0.5  # Lower bound with offset
-
-# w5 = 0.5 * (1 + np.sign(np.sin(np.linspace(0, 2 * np.pi, L + 1))))  # Square wave
-
-# w6 = 2.4 * (1 + np.sign(np.sin(np.linspace(0, 2 * np.pi, L + 1))))  # Square wave
-
-e1 = np.zeros((L, 1))
-e2 = np.zeros((L, 1))
-e3 = np.zeros((L, 1))
-e4 = np.zeros((L, 1))
 
 
 
@@ -166,15 +145,15 @@ for k in range (1, L-1):
         sm3[1] = 0
         sm4[1] = 0
     else:
-        # sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
-        # sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
-        # sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
-        # sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
+        sm1[k] = sm1[k-1] + (ss1[k]-alpha1*si1[k]-epsilon*T*np.sign(ss1[k])-si1[k]) / (phi1[k])
 
-        sm1[k] = sm1[k-1] + (-beta * si1[k] - epsilon * T * np.sign(ss1[k])-alpha1 * si1[k] - si1[k]) / (phi1[k])
-        sm2[k] = sm2[k-1] + (-beta * si2[k] - epsilon * T * np.sign(ss2[k])-alpha1 * si2[k] - si2[k]) / (phi2[k])
-        sm3[k] = sm3[k-1] + (-beta * si3[k] - epsilon * T * np.sign(ss3[k])-alpha1 * si3[k] - si3[k]) / (phi3[k])
-        sm4[k] = sm4[k-1] + (-beta * si4[k] - epsilon * T * np.sign(ss4[k])-alpha1 * si4[k] - si4[k]) / (phi4[k])
+        # sm1[k] = sm1[k-1] + (-beta * si1[k] - epsilon * T * np.sign(ss1[k])-alpha1 * si1[k] - si1[k]) / (phi1[k])
+        # sm2[k] = sm2[k-1] + (-beta * si2[k] - epsilon * T * np.sign(ss2[k])-alpha1 * si2[k] - si2[k]) / (phi2[k])
+        # sm3[k] = sm3[k-1] + (-beta * si3[k] - epsilon * T * np.sign(ss3[k])-alpha1 * si3[k] - si3[k]) / (phi3[k])
+        # sm4[k] = sm4[k-1] + (-beta * si4[k] - epsilon * T * np.sign(ss4[k])-alpha1 * si4[k] - si4[k]) / (phi4[k])
 
     
     if k == 1:
@@ -196,11 +175,10 @@ for k in range (1, L-1):
     y4[1] = 0.1
 
 
-    y1[k + 1] = m / (rT * 0.3) * u1[k]
-    y2[k + 1] = m / (rT * 0.3) * u2[k]
+    y1[k + 1] = m / (rT * 0.1) * u1[k]
+    y2[k + 1] = m / (rT * 0.1) * u2[k]
     y3[k + 1] = m / (rT * 0.3) * u3[k]
     y4[k + 1] = m / (rT * 0.3) * u4[k]
-
 
     e1[k] = abs(y1[k]-w5[k])
     e2[k] = abs(y2[k]-y1[k])
@@ -209,34 +187,36 @@ for k in range (1, L-1):
 
 
 
+# plt.figure(figsize=(8, 6))
 
-# # plt.figure(figsize=(8, 6))
+# plt.plot(y1[:-1], '-k', markersize=4, label='Y1')
+# plt.plot(y2[:-1], '-', markersize=4, label='Y2')
+# plt.plot(y3[:-1], '--g', markersize=4, label='Y3')
+# plt.plot(y4[:-1], '--b', markersize=4, label='Y4')
+# # plt.plot(yd[:-1], '-*g', markersize=4, label='Y2')
+# plt.plot(w5[:-1], '-*r', markersize=2, label='w5')
+# plt.plot(w6[:-1], '-*r', markersize=2, label='w5')
+# plt.grid(True)
+# plt.xlabel("time step", fontsize=12)
+# plt.ylabel("outputs", fontsize=12)
+# plt.legend(fontsize=10)
+# plt.show()
 
-plt.plot(y1[:-1], '-k', markersize=4, label='Y1')
-plt.plot(y2[:-1], '-', markersize=4, label='Y2')
-plt.plot(y3[:-1], '--g', markersize=4, label='Y3')
-plt.plot(y4[:-1], '--b', markersize=4, label='Y4')
-# plt.plot(yd[:-1], '-*g', markersize=4, label='Y2')
-plt.plot(w5[:-1], '-*r', markersize=2, label='w5')
-plt.plot(w6[:-1], '-*r', markersize=2, label='w5')
-plt.grid(True)
-plt.xlabel("time step", fontsize=12)
-plt.ylabel("outputs", fontsize=12)
-plt.legend(fontsize=10)
+
+
+# Plotting containment errors
+plt.figure(figsize=(8, 6))
+plt.plot(e1[:-1], '-r', markersize=4, label='Error 1 (E1)')
+plt.plot(e2[:-1], '-b', markersize=4, label='Error 2 (E2)')
+plt.plot(e3[:-1], '--g', markersize=4, label='Error 3 (E3)')
+plt.plot(e4[:-1], '--k', markersize=4, label='Error 4 (E4)')
+plt.title('Containment Errors')
+plt.xlabel('Time Step')
+plt.ylabel('Error Magnitude')
+plt.legend()
+plt.grid()
 plt.show()
 
 
 
 
-# # Plotting containment errors
-# plt.figure(figsize=(8, 6))
-# plt.plot(e1[:-1], '-r', markersize=4, label='Error 1 (E1)')
-# plt.plot(e2[:-1], '-b', markersize=4, label='Error 2 (E2)')
-# plt.plot(e3[:-1], '--g', markersize=4, label='Error 3 (E3)')
-# plt.plot(e4[:-1], '--k', markersize=4, label='Error 4 (E4)')
-# plt.title('Containment Errors')
-# plt.xlabel('Time Step')
-# plt.ylabel('Error Magnitude')
-# plt.legend()
-# plt.grid()
-# plt.show()
