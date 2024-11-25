@@ -256,7 +256,11 @@ plt.plot(phi4[:-1], '--b', markersize=4, label='phi4')
 plt.grid(True)
 plt.xlabel("time step", fontsize=12)
 plt.ylabel("outputs", fontsize=12)
-plt.legend(fontsize=10)
-plt.show()
+
+
+
 
 plot_figure()
+
+plt.legend(fontsize=10)
+plt.show()
