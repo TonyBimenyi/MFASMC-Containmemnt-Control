@@ -231,7 +231,7 @@ def plot_figure():
     plt.xlabel("time step", fontsize=12)
     plt.ylabel("outputs", fontsize=12)
     plt.title("Without Second Order Sliding Dynamics",fontsize=10)
-    plt.show()
+
 
 
 
