@@ -255,7 +255,8 @@ plt.plot(phi4[:-1], '--b', markersize=4, label='phi4')
 # plt.plot(w6[:-1], '-*r', markersize=2, label='w5')
 plt.grid(True)
 plt.xlabel("time step", fontsize=12)
-plt.ylabel("outputs", fontsize=12)
+plt.ylabel("outputs", fontsize=12)  
+plt.title("With Second Order Sliding Dynamics",fontsize=10)
 
 
 
