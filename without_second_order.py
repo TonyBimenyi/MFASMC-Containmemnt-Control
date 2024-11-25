@@ -218,7 +218,18 @@ for k in range (1, L-1):
 # plt.show()
 
 
-
+plt.plot(phi1[:-1], '-k', markersize=4, label='phi1')
+plt.plot(phi2[:-1], '-', markersize=4, label='phi2')
+plt.plot(phi3[:-1], '--g', markersize=4, label='phi3')
+plt.plot(phi4[:-1], '--b', markersize=4, label='phi4')
+# plt.plot(yd[:-1], '-*g', markersize=4, label='Y2')
+# plt.plot(w5[:-1], '-*r', markersize=2, label='w5')
+# plt.plot(w6[:-1], '-*r', markersize=2, label='w5')
+plt.grid(True)
+plt.xlabel("time step", fontsize=12)
+plt.ylabel("outputs", fontsize=12)
+plt.legend(fontsize=10)
+plt.show()
 
 
 
