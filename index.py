@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from without_second_order import plot_figure
 
 #Defining Parameters
 
@@ -243,6 +244,8 @@ for k in range (1, L-1):
 
 # plt.figure(figsize=(8, 6))
 
+
+plt.figure()
 plt.plot(phi1[:-1], '-k', markersize=4, label='phi1')
 plt.plot(phi2[:-1], '-', markersize=4, label='phi2')
 plt.plot(phi3[:-1], '--g', markersize=4, label='phi3')
@@ -255,3 +258,5 @@ plt.xlabel("time step", fontsize=12)
 plt.ylabel("outputs", fontsize=12)
 plt.legend(fontsize=10)
 plt.show()
+
+plot_figure()
