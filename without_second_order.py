@@ -229,7 +229,7 @@ def plot_figure():
     plt.grid(True)
     plt.xlabel("time step", fontsize=12)
     plt.ylabel("outputs", fontsize=12)
-    plt.legend(fontsize=10)
+    plt.legend("Without Second Order Sliding Dynamics",fontsize=10)
     plt.show()
 
 
