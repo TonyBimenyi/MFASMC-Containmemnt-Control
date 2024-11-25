@@ -189,18 +189,18 @@ for k in range (1, L-1):
 
 # plt.figure(figsize=(8, 6))
 
-plt.plot(y1[:-1], '-k', markersize=4, label='Y1')
-plt.plot(y2[:-1], '-', markersize=4, label='Y2')
-plt.plot(y3[:-1], '--g', markersize=4, label='Y3')
-plt.plot(y4[:-1], '--b', markersize=4, label='Y4')
-# plt.plot(yd[:-1], '-*g', markersize=4, label='Y2')
-plt.plot(w5[:-1], '-*r', markersize=2, label='w5')
-plt.plot(w6[:-1], '-*r', markersize=2, label='w5')
-plt.grid(True)
-plt.xlabel("time step", fontsize=12)
-plt.ylabel("outputs", fontsize=12)
-plt.legend(fontsize=10)
-plt.show()
+# plt.plot(y1[:-1], '-k', markersize=4, label='Y1')
+# plt.plot(y2[:-1], '-', markersize=4, label='Y2')
+# plt.plot(y3[:-1], '--g', markersize=4, label='Y3')
+# plt.plot(y4[:-1], '--b', markersize=4, label='Y4')
+# # plt.plot(yd[:-1], '-*g', markersize=4, label='Y2')
+# plt.plot(w5[:-1], '-*r', markersize=2, label='w5')
+# plt.plot(w6[:-1], '-*r', markersize=2, label='w5')
+# plt.grid(True)
+# plt.xlabel("time step", fontsize=12)
+# plt.ylabel("outputs", fontsize=12)
+# plt.legend(fontsize=10)
+# plt.show()
 
 
 
@@ -216,6 +216,8 @@ plt.show()
 # plt.legend()
 # plt.grid()
 # plt.show()
+
+
 
 
 

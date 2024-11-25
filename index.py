@@ -243,10 +243,10 @@ for k in range (1, L-1):
 
 # plt.figure(figsize=(8, 6))
 
-plt.plot(phi1[:-1], '-k', markersize=4, label='Y1')
-plt.plot(phi2[:-1], '-', markersize=4, label='Y2')
-plt.plot(phi3[:-1], '--g', markersize=4, label='Y3')
-plt.plot(phi4[:-1], '--b', markersize=4, label='Y4')
+plt.plot(phi1[:-1], '-k', markersize=4, label='phi1')
+plt.plot(phi2[:-1], '-', markersize=4, label='phi2')
+plt.plot(phi3[:-1], '--g', markersize=4, label='phi3')
+plt.plot(phi4[:-1], '--b', markersize=4, label='phi4')
 # plt.plot(yd[:-1], '-*g', markersize=4, label='Y2')
 # plt.plot(w5[:-1], '-*r', markersize=2, label='w5')
 # plt.plot(w6[:-1], '-*r', markersize=2, label='w5')
