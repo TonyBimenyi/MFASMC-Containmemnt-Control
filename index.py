@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from without_second_order import plot_figure
+from without_second_order import plot_output_figure
+
 
 #Defining Parameters
 
@@ -260,7 +262,7 @@ plt.title("With Second Order Sliding Dynamics",fontsize=10)
 
 
 
-
+plot_output_figure()
 plot_figure()
 
 plt.legend(fontsize=10)
