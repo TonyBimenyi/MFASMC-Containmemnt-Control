@@ -234,19 +234,19 @@ plt.show()
 
 
 # Plotting containment errors
-# plt.figure(figsize=(8, 6))
-# plt.plot(e1[:-1], '-r', markersize=4, label='Error 1 (E1)')
-# plt.plot(e2[:-1], '-b', markersize=4, label='Error 2 (E2)')
-# plt.plot(e3[:-1], '--g', markersize=4, label='Error 3 (E3)')
-# plt.plot(e4[:-1], '--k', markersize=4, label='Error 4 (E4)')
-# plt.title('Containment Errors')
-# plt.xlabel('Time Step')
-# plt.ylabel('Error Magnitude')
-# plt.legend()
-# plt.grid()
-# plt.show()
+plt.figure(figsize=(8, 6))
+plt.plot(e1[:-1], '-r', markersize=4, label='Error 1 (E1)')
+plt.plot(e2[:-1], '-b', markersize=4, label='Error 2 (E2)')
+plt.plot(e3[:-1], '--g', markersize=4, label='Error 3 (E3)')
+plt.plot(e4[:-1], '--k', markersize=4, label='Error 4 (E4)')
+plt.title('Containment Errors')
+plt.xlabel('Time Step')
+plt.ylabel('Error Magnitude')
+plt.legend()
+plt.grid()
+plt.show()
 
-# plt.figure(figsize=(8, 6))
+plt.figure(figsize=(8, 6))
 
 
 
