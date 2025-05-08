@@ -101,10 +101,10 @@ for k in range (1, L-1):
         phi4[k] = phi4[k - 1] + (eta * (u4[k - 1] - u4[k - 2]) / (mu + (abs(u4[k - 1] - u4[k - 2]))**2)) * (y4[k] - y4[k - 1] - phi4[k - 1] * (u4[k - 1] - u4[k - 2]))
 
 
-    si1[k] = y2[k] - 2 * y1[k] + w5[k]
-    si2[k] = y3[k] - y2[k]
-    si3[k] = y4[k] - 2 * y3[k] + y1[k]
-    si4[k] = y2[k] - 2 * y4[k] + w6[k]
+    xi1[k] = y2[k] - 2 * y1[k] + w5[k]
+    xi2[k] = y3[k] - y2[k]
+    xi3[k] = y4[k] - 2 * y3[k] + y1[k]
+    xi4[k] = y2[k] - 2 * y4[k] + w6[k]
 
 
 

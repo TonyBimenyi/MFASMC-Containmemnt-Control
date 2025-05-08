@@ -115,6 +115,10 @@ for k = 1:m
 end
 
 
-
+% Example for one time step:
+xi1(k) = y2(k) - 2 * y1(k) + w5(k);
+xi2(k) = y3(k) - y2(k);
+xi3(k) = y4(k) - 2 * y3(k) + y1(k);
+xi4(k) = y2(k) - 2 * y4(k) + w6(k);
 
 
