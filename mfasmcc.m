@@ -121,6 +121,33 @@ xi2(k) = y3(k) - y2(k);
 xi3(k) = y4(k) - 2 * y3(k) + y1(k);
 xi4(k) = y2(k) - 2 * y4(k) + w6(k);
 
+% Fix: Handle k=1 case for sliding surfaces
+if k == 1
+    s1(k) = 0;
+    s2(k) = 0;
+    s3(k) = 0;
+    s4(k) = 0;
+else
+    s1(k) = alpha * xi1(k) - xi1(k-1);
+    s2(k) = alpha * xi2(k) - xi2(k-1);
+    s3(k) = alpha * xi3(k) - xi3(k-1);
+    s4(k) = alpha * xi4(k) - xi4(k-1);
+end
+
+% Fix: Handle k=1 case for sliding surfaces
+if k == 1
+    omega1(k) = 0;
+    omega2(k) = 0;
+    omega3(k) = 0;
+    omega4(k) = 0;
+else
+    omega1(k) = s1(k) + tau * (s1(k-1));
+    omega2(k) = s2(k) + tau * (s2(k-1));
+    omega3(k) = s3(k) + tau * (s3(k-1));
+    omega4(k) = s4(k) + tau * (s4(k-1));
+end
+
+
 if k == 1
     sm1(k) = 0.1;
     sm2(k) = 0.1;
