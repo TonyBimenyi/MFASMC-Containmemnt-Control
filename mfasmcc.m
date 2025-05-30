@@ -72,22 +72,34 @@ omega4 = zeros(m, 1);
 w5 = zeros(1, m);  % example length, adjust as needed
 w6 = zeros(1, m);  % example length, adjust as needed
 
+% % Set w5 values according to conditions
+% w5(1:165)     = 1.4;
+% w5(166:330)   = 1.6;
+% w5(331:end)   = 1.3;
+
+% % Set w6 values according to conditions
+% w6(1:165)     = 0.7;
+% w6(166:330)   = 1.2;
+% w6(331:end)   = 1.1;
+
+
 % Time vector for sinusoidal signals
-k = 1:m;
-t = (k - 1) * T; % Time vector, where T = 0.1 (from your parameters)
+% k = 1:m;
+% t = (k-1) * T; % Time vector: t = (k-1)*T
 
-% Define sinusoidal signals for w5 and w6 for containment control
-amplitude_w5 = 0.5; % Amplitude for w5
-amplitude_w6 = 0.5; % Amplitude for w6
-frequency_w5 = 0.02; % Frequency for w5 (in Hz, slow oscillation for smooth tracking)
-frequency_w6 = 0.02; % Frequency for w6 (same frequency for synchronized oscillation)
-offset_w5 = 1.5; % Mean value for w5 (upper boundary of containment region)
-offset_w6 = 0.5; % Mean value for w6 (lower boundary of containment region)
-phase_shift = pi/2; % Phase shift to differentiate w5 and w6
+% Define new sinusoidal leader signals (choose one of the variations below)
 
-w5 = offset_w5 + amplitude_w5 * sin(2 * pi * frequency_w5 * t ) ;
-w6 = offset_w6 + amplitude_w6 * sin(2 * pi * frequency_w6 * t + phase_shift);
+% Variation 4: High amplitude difference with moderate frequency
+% w5 = 1.4 + 0.4 * sin(0.2 * t); % Amplitude = 0.4, frequency = 0.2 rad/s, offset = 1.4
+% w6 = 0.9 + 0.15 * sin(0.2 * t); % Amplitude = 0.15, frequency = 0.2 rad/s, offset = 0.9
 
+% Variation 5: Chirp-like signals with increasing frequency
+% w5 = 1.2 + 0.25 * sin(0.1 * t + 0.01 * t.^2); % Chirp with amplitude = 0.25
+% w6 = 1.2 + 0.25 * sin(0.1 * t + 0.01 * t.^2 + pi/3); % Same chirp, phase shift = pi/3
+
+% Variation 6: Mixed sinusoidal and constant signal
+w5 = 1.5 + 0.2 * sin(0.3 * t); % Amplitude = 0.2, frequency = 0.3 rad/s, offset = 1.5
+w6 = 1.2 * 0.2 * sin(0.3 * t); % Constant signal at 0.8different offset
 for k = 1:m
 
     if k == 1
@@ -218,7 +230,7 @@ for k = 1:m
 
     y1(k + 1) = m / (rT * 0.1) * u1(k);
     y2(k + 1) = m / (rT * 0.1) * u2(k);
-    y3(k + 1) = m / (rT * 0.3) * u3(k);
+    y3(k + 1) = m / (rT * 0.1) * u3(k);
     y4(k + 1) = m / (rT * 0.3) * u4(k);
     % Ensure y values do not exceed bounds (example, adjust as needed)
  
@@ -244,13 +256,13 @@ k = 1:m;
 
 % Plot system outputs (y1, y2, y3, y4) and leaders (w5, w6)
 figure;
-plot(k, y1(1:m), 'b-', 'LineWidth', 1.5, 'DisplayName', 'y1');
+plot(k, y1(1:m), 'b-', 'LineWidth', 2.0, 'DisplayName', 'y1');
 hold on;
-plot(k, y2(1:m), 'r-', 'LineWidth', 1.5, 'DisplayName', 'y2');
-plot(k, y3(1:m), 'g-', 'LineWidth', 1.5, 'DisplayName', 'y3');
-plot(k, y4(1:m), 'm-', 'LineWidth', 1.5, 'DisplayName', 'y4');
-plot(k, w5, 'c-', 'LineWidth', 1.5, 'DisplayName', 'w5');
-plot(k, w6, 'k-', 'LineWidth', 1.5, 'DisplayName', 'w6');
+plot(k, y2(1:m), 'r-', 'LineWidth', 2.0, 'DisplayName', 'y2');
+plot(k, y3(1:m), 'g-', 'LineWidth', 2.0, 'DisplayName', 'y3');
+plot(k, y4(1:m), 'm-', 'LineWidth', 2.0, 'DisplayName', 'y4');
+plot(k, w5, 'c--', 'LineWidth', 2.0, 'DisplayName', 'w5');
+plot(k, w6, 'k--', 'LineWidth', 2.0, 'DisplayName', 'w6');
 hold off;
 title('System Outputs and Leader Signals');
 xlabel('Iteration (k)');
