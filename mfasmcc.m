@@ -2,18 +2,18 @@ clc; clear;
 
 %Parameters
 
-rho = 7.5;
-eta = 1;
-lamda = 350;
-mu = 0.005;
+rho = 10.5;
+eta = 5;
+lamda = 100;
+mu = 80.5;
 epsilon = 1e-5;
-alpha = 15;
+alpha = 1;
 
 T = 0.1;
-gamma1 = 0.45;
-gamma2 = 0.15;
-gamma3 = 0.45;
-gamma4 = 0.15;
+gamma1 = 0.05;
+gamma2 = 0.05;
+gamma3 = 0.05;
+gamma4 = 0.05;
 
 beta = 10;
 sigma = 95;
@@ -22,7 +22,7 @@ nena = 1e-5;
 
 rT = 1024;
 L = 200;
-m = 200;
+m = 500;
 n =600;
 
 
@@ -72,15 +72,21 @@ omega4 = zeros(m, 1);
 w5 = zeros(1, m);  % example length, adjust as needed
 w6 = zeros(1, m);  % example length, adjust as needed
 
-% Set w5 values according to conditions
-w5(1:165)     = 1.4;
-w5(166:330)   = 1.6;
-w5(331:end)   = 1.3;
+% Time vector for sinusoidal signals
+k = 1:m;
+t = (k - 1) * T; % Time vector, where T = 0.1 (from your parameters)
 
-% Set w6 values according to conditions
-w6(1:165)     = 0.7;
-w6(166:330)   = 1.2;
-w6(331:end)   = 1.1;
+% Define sinusoidal signals for w5 and w6 for containment control
+amplitude_w5 = 0.5; % Amplitude for w5
+amplitude_w6 = 0.5; % Amplitude for w6
+frequency_w5 = 0.02; % Frequency for w5 (in Hz, slow oscillation for smooth tracking)
+frequency_w6 = 0.02; % Frequency for w6 (same frequency for synchronized oscillation)
+offset_w5 = 1.5; % Mean value for w5 (upper boundary of containment region)
+offset_w6 = 0.5; % Mean value for w6 (lower boundary of containment region)
+phase_shift = pi/2; % Phase shift to differentiate w5 and w6
+
+w5 = offset_w5 + amplitude_w5 * sin(2 * pi * frequency_w5 * t ) ;
+w6 = offset_w6 + amplitude_w6 * sin(2 * pi * frequency_w6 * t + phase_shift);
 
 for k = 1:m
 
@@ -210,15 +216,12 @@ for k = 1:m
 
     % System dynamics (example, replace with actual system equations)
 
-    y1(k+1) = y1(k) + T * (u1(k) - y1(k));
-    y2(k+1) = y2(k) + T * (u2(k) - y2(k));
-    y3(k+1) = y3(k) + T * (u3(k) - y3(k));
-    y4(k+1) = y4(k) + T * (u4(k) - y4(k));
+    y1(k + 1) = m / (rT * 0.1) * u1(k);
+    y2(k + 1) = m / (rT * 0.1) * u2(k);
+    y3(k + 1) = m / (rT * 0.3) * u3(k);
+    y4(k + 1) = m / (rT * 0.3) * u4(k);
     % Ensure y values do not exceed bounds (example, adjust as needed)
-    y1(k+1) = max(0, min(1, y1(k+1)));
-    y2(k+1) = max(0, min(1, y2(k+1)));
-    y3(k+1) = max(0, min(1, y3(k+1)));
-    y4(k+1) = max(0, min(1, y4(k+1)));
+ 
     % Ensure u values do not exceed bounds (example, adjust as needed)
     u1(k) = max(0, min(1, u1(k)));
     u2(k) = max(0, min(1, u2(k)));
@@ -230,38 +233,30 @@ for k = 1:m
     phi3(k) = max(0, min(1, phi3(k)));
     phi4(k) = max(0, min(1, phi4(k)));
 
-    %plotting outputs
-    if k == m
-        figure;
-        subplot(2, 2, 1);
-        plot(1:m, y1(1:m), 'r', 'LineWidth', 2);
-        title('Output y1');
-        xlabel('Time step');
-        ylabel('y1');
+    % Plotting
 
-        subplot(2, 2, 2);
-        plot(1:m, y2(1:m), 'g', 'LineWidth', 2);
-        title('Output y2');
-        xlabel('Time step');
-        ylabel('y2');
-
-        subplot(2, 2, 3);
-        plot(1:m, y3(1:m), 'b', 'LineWidth', 2);
-        title('Output y3');
-        xlabel('Time step');
-        ylabel('y3');
-
-        subplot(2, 2, 4);
-        plot(1:m, y4(1:m), 'k', 'LineWidth', 2);
-        title('Output y4');
-        xlabel('Time step');
-        ylabel('y4');
-
-        sgtitle('Outputs of the System');
-    end
 
 
 end
+
+% Time vector for plotting (assuming k represents discrete time steps)
+k = 1:m;
+
+% Plot system outputs (y1, y2, y3, y4) and leaders (w5, w6)
+figure;
+plot(k, y1(1:m), 'b-', 'LineWidth', 1.5, 'DisplayName', 'y1');
+hold on;
+plot(k, y2(1:m), 'r-', 'LineWidth', 1.5, 'DisplayName', 'y2');
+plot(k, y3(1:m), 'g-', 'LineWidth', 1.5, 'DisplayName', 'y3');
+plot(k, y4(1:m), 'm-', 'LineWidth', 1.5, 'DisplayName', 'y4');
+plot(k, w5, 'c-', 'LineWidth', 1.5, 'DisplayName', 'w5');
+plot(k, w6, 'k-', 'LineWidth', 1.5, 'DisplayName', 'w6');
+hold off;
+title('System Outputs and Leader Signals');
+xlabel('Iteration (k)');
+ylabel('Value');
+legend('show');
+grid on;
 
 
 
