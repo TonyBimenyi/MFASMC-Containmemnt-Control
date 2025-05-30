@@ -18,6 +18,7 @@ gamma4 = 0.15;
 beta = 10;
 sigma = 95;
 tau = 1e-5;
+nena = 1e-5;
 
 rT = 1024;
 L = 200;
@@ -170,20 +171,93 @@ for k = 1:m
         sm4(k) = 0;
     else
         sm1(k) = sm1(k-1) + (beta * phi1(k)) / (sigma + (phi1(k))^2) * ...
-            ( (xi1(k) + (y4(k) - y4(k-1)) + (yd(k+1) - yd(k))) / (1 + 1) ...
-            - (xi1(k)) / (alpha * (2)) + tau * sign(s1(k)) );
+            ( (xi1(k) + (y4(k) - y4(k-1)) + (w5(k) - w5(k-1))+(w6(k) - w6(k-1))) / (1 + 1) ...
+            + (1-tau * alpha) * xi1(k) - tau * xi1(k-1) / (alpha * (2)) + nena * sign(omega1(k)) );
 
-        sm2(k) = sm2(k-1) + (beta * phi2(k)) / (sigma + (phi2(k)^2)) * ...
-            ( (xi2(k) + (y1(k) - y1(k-1)) + (y3(k) - y3(k-1))) / (1 + 1) ...
-            - (xi2(k)) / (alpha * 2) + tau * sign(s2(k)) );
+        sm2(k) = sm2(k-1) + (beta * phi2(k)) / (sigma + (phi2(k))^2) * ...
+            ( (xi2(k) + (y3(k) - y3(k-1)) + (w5(k) - w5(k-1))+(w6(k) - w6(k-1))) / (1) ...
+            + (1-tau * alpha) * xi2(k) - tau * xi2(k-1) / (alpha * (1)) + nena * sign(omega2(k)) );
 
-        sm3(k) = sm3(k-1) + (beta * phi3(k)) / (sigma + (phi3(k)^2)) * ...
-            ( (xi3(k) + (y2(k) - y2(k-1)) + (yd(k+1) - yd(k))) / (1 + 1) ...
-            - (xi3(k)) / (alpha * (2)) + tau * sign(s3(k)) );
 
-        sm4(k) = sm4(k-1) + (beta * phi4(k)) / (sigma + (phi4(k)^2)) * ...
-            ( (xi4(k) + (y1(k) - y1(k-1)) + (y3(k) - y3(k-1))) / (1 + 1) ...
-            - (xi4(k)) / (alpha * (2)) + tau * sign(s4(k)) );
+        sm3(k) = sm3(k-1) + (beta * phi3(k)) / (sigma + (phi3(k))^2) * ...
+            ( (xi3(k) + (y1(k) - y1(k-1)) + (y4(k) - y4(k-1)) + (w5(k) - w5(k-1))+(w6(k) - w6(k-1))) / (2) ...
+            + (1-tau * alpha) * xi3(k) - tau * xi3(k-1) / (alpha * (2)) + nena * sign(omega3(k)) );
+
+
+        sm4(k) = sm4(k-1) + (beta * phi4(k)) / (sigma + (phi4(k))^2) * ...
+            ( (xi4(k) + (y2(k) - y3(k-1)) + (w5(k) - w5(k-1))+(w6(k) - w6(k-1))) / (2) ...
+            + (1-tau * alpha) * xi4(k) - tau * xi4(k-1) / (alpha * (2)) + nena * sign(omega4(k)) );
+    end
+
+    % Control signal
+    if k == 1
+        u1(k) = 0;
+        u2(k) = 0;
+        u3(k) = 0;
+        u4(k) = 0;
+    else
+        u1(k) = mfa1(k) + gamma1 * sm1(k);
+        u2(k) = mfa2(k) + gamma2 * sm2(k);
+        u3(k) = mfa3(k) + gamma3 * sm3(k);
+        u4(k) = mfa4(k) + gamma4 * sm4(k);
+    end
+    if k == 1
+        y1(k) = 0;
+        y2(k) = 0;
+        y3(k) = 0;
+        y4(k) = 0;
+    end
+
+    % System dynamics (example, replace with actual system equations)
+
+    y1(k+1) = y1(k) + T * (u1(k) - y1(k));
+    y2(k+1) = y2(k) + T * (u2(k) - y2(k));
+    y3(k+1) = y3(k) + T * (u3(k) - y3(k));
+    y4(k+1) = y4(k) + T * (u4(k) - y4(k));
+    % Ensure y values do not exceed bounds (example, adjust as needed)
+    y1(k+1) = max(0, min(1, y1(k+1)));
+    y2(k+1) = max(0, min(1, y2(k+1)));
+    y3(k+1) = max(0, min(1, y3(k+1)));
+    y4(k+1) = max(0, min(1, y4(k+1)));
+    % Ensure u values do not exceed bounds (example, adjust as needed)
+    u1(k) = max(0, min(1, u1(k)));
+    u2(k) = max(0, min(1, u2(k)));
+    u3(k) = max(0, min(1, u3(k)));
+    u4(k) = max(0, min(1, u4(k)));
+    % Ensure phi values do not exceed bounds (example, adjust as needed)
+    phi1(k) = max(0, min(1, phi1(k)));
+    phi2(k) = max(0, min(1, phi2(k)));
+    phi3(k) = max(0, min(1, phi3(k)));
+    phi4(k) = max(0, min(1, phi4(k)));
+
+    %plotting outputs
+    if k == m
+        figure;
+        subplot(2, 2, 1);
+        plot(1:m, y1(1:m), 'r', 'LineWidth', 2);
+        title('Output y1');
+        xlabel('Time step');
+        ylabel('y1');
+
+        subplot(2, 2, 2);
+        plot(1:m, y2(1:m), 'g', 'LineWidth', 2);
+        title('Output y2');
+        xlabel('Time step');
+        ylabel('y2');
+
+        subplot(2, 2, 3);
+        plot(1:m, y3(1:m), 'b', 'LineWidth', 2);
+        title('Output y3');
+        xlabel('Time step');
+        ylabel('y3');
+
+        subplot(2, 2, 4);
+        plot(1:m, y4(1:m), 'k', 'LineWidth', 2);
+        title('Output y4');
+        xlabel('Time step');
+        ylabel('y4');
+
+        sgtitle('Outputs of the System');
     end
 
 
