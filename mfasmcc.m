@@ -69,37 +69,37 @@ omega3 = zeros(m, 1);
 omega4 = zeros(m, 1);
 
 % Preallocate arrays (adjust size if needed)
-w5 = zeros(1, m);  % example length, adjust as needed
-w6 = zeros(1, m);  % example length, adjust as needed
+% w5 = zeros(1, m);  % example length, adjust as needed
+% w6 = zeros(1, m);  % example length, adjust as needed
 
-% Set w5 values according to conditions
-w5(1:165)     = 1.4;
-w5(166:330)   = 1.6;
-w5(331:end)   = 1.3;
+% % Set w5 values according to conditions
+% w5(1:165)     = 1.4;
+% w5(166:330)   = 1.6;
+% w5(331:end)   = 1.3;
 
-% Set w6 values according to conditions
-w6(1:165)     = 0.7;
-w6(166:330)   = 1.2;
-w6(331:end)   = 1.1;
+% % Set w6 values according to conditions
+% w6(1:165)     = 0.7;
+% w6(166:330)   = 1.2;
+% w6(331:end)   = 1.1;
 
 
 % Time vector for sinusoidal signals
-% k = 1:m;
-% t = (k-1) * T; % Time vector: t = (k-1)*T
+k = 1:m;
+t = (k-1) * T; % Time vector: t = (k-1)*T
 
-% Define new sinusoidal leader signals (choose one of the variations below)
+% Define sinusoidal leader signals (choose one of the variations below)
 
-% Variation 4: High amplitude difference with moderate frequency
-% w5 = 1.4 + 0.4 * sin(0.2 * t); % Amplitude = 0.4, frequency = 0.2 rad/s, offset = 1.4
-% w6 = 0.9 + 0.15 * sin(0.2 * t); % Amplitude = 0.15, frequency = 0.2 rad/s, offset = 0.9
+% Variation 1: Low-frequency, same amplitude, phase-shifted signals
+w5 = 0.5 + 0.25 * sin(0.1 * t); % Amplitude = 0.25, frequency = 0.1 rad/s, offset = 1.15
+w6 = 0.5 + 0.25 * sin(0.1 * t + pi/2); % Same amplitude and frequency, phase shift = pi/2
 
-% Variation 5: Chirp-like signals with increasing frequency
-% w5 = 1.2 + 0.25 * sin(0.1 * t + 0.01 * t.^2); % Chirp with amplitude = 0.25
-% w6 = 1.2 + 0.25 * sin(0.1 * t + 0.01 * t.^2 + pi/3); % Same chirp, phase shift = pi/3
+% % Variation 2: Different frequencies and amplitudes
+% w5 = 1.2 + 0.3 * sin(0.15 * t); % Amplitude = 0.3, frequency = 0.15 rad/s
+% w6 = 1.1 + 0.2 * sin(0.3 * t); % Amplitude = 0.2, frequency = 0.3 rad/s
 
-% Variation 6: Mixed sinusoidal and constant signal
-% w5 = 1.5 + 0.2 * sin(0.3 * t); % Amplitude = 0.2, frequency = 0.3 rad/s, offset = 1.5
-% w6 = 1.2 * 0.2 * sin(0.3 * t); % Constant signal at 0.8different offset
+% Variation 3: Higher frequency with phase shift and different offsets
+% w5 = 1.3 + 0.2 * sin(0.5 * t); % Amplitude = 0.2, frequency = 0.5 rad/s
+% w6 = 1.0 + 0.2 * sin(0.5 * t + pi/4); % Same frequency, phase shift = pi/4, different offset
 for k = 1:m
 
     if k == 1
@@ -234,6 +234,10 @@ for k = 1:m
     y4(k + 1) = m / (rT * 0.3) * u4(k);
     % Ensure y values do not exceed bounds (example, adjust as needed)
  
+    y1(k) = max(0, min(1, y1(k)));
+    y2(k) = max(0, min(1, y2(k)));
+    y3(k) = max(0, min(1, y3(k)));
+    y4(k) = max(0, min(1, y4(k)));
     % Ensure u values do not exceed bounds (example, adjust as needed)
     u1(k) = max(0, min(1, u1(k)));
     u2(k) = max(0, min(1, u2(k)));
@@ -256,19 +260,18 @@ k = 1:m;
 
 % Plot system outputs (y1, y2, y3, y4) and leaders (w5, w6)
 figure;
-plot(k, y1(1:m), 'b-', 'LineWidth', 2.0, 'DisplayName', 'y1');
+plot(k, y1(1:m), 'b-', 'LineWidth', 2.5, 'DisplayName', 'y1');
 hold on;
-plot(k, y2(1:m), 'r-', 'LineWidth', 2.0, 'DisplayName', 'y2');
-plot(k, y3(1:m), 'g-', 'LineWidth', 2.0, 'DisplayName', 'y3');
-plot(k, y4(1:m), 'm-', 'LineWidth', 2.0, 'DisplayName', 'y4');
-plot(k, w5, 'c--', 'LineWidth', 2.0, 'DisplayName', 'w5');
-plot(k, w6, 'k--', 'LineWidth', 2.0, 'DisplayName', 'w6');
+plot(k, y2(1:m), 'r-', 'LineWidth', 2.5, 'DisplayName', 'y2');
+plot(k, y3(1:m), 'g-', 'LineWidth', 2.5, 'DisplayName', 'y3');
+plot(k, y4(1:m), 'm-', 'LineWidth', 2.5, 'DisplayName', 'y4');
+plot(k, w5, 'c--', 'LineWidth', 2.5, 'DisplayName', 'w5');
+plot(k, w6, 'k--', 'LineWidth', 2.5, 'DisplayName', 'w6');
 hold off;
 title('System Outputs and Leader Signals');
 xlabel('Iteration (k)');
 ylabel('Value');
 legend('show');
-ylim([0 1.8]);
 grid on;
 
 
