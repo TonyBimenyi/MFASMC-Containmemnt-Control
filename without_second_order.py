@@ -101,10 +101,10 @@ for k in range (1, L-1):
         phi4[k] = phi4[k - 1] + (eta * (u4[k - 1] - u4[k - 2]) / (mu + (abs(u4[k - 1] - u4[k - 2]))**2)) * (y4[k] - y4[k - 1] - phi4[k - 1] * (u4[k - 1] - u4[k - 2]))
 
 
-    xi1[k] = y2[k] - 2 * y1[k] + w5[k]
-    xi2[k] = y3[k] - y2[k]
-    xi3[k] = y4[k] - 2 * y3[k] + y1[k]
-    xi4[k] = y2[k] - 2 * y4[k] + w6[k]
+    si1[k] = y2[k] - 2 * y1[k] + w5[k]
+    si2[k] = y3[k] - y2[k]
+    si3[k] = y4[k] - 2 * y3[k] + y1[k]
+    si4[k] = y2[k] - 2 * y4[k] + w6[k]
 
 
 
@@ -112,6 +112,19 @@ for k in range (1, L-1):
     # ss2[k] = si2[k] + alpha1*si2[k-1] + alpha2*np.sign(si2[k-1])
     # ss3[k] = si3[k] + alpha1*si3[k-1] + alpha2*np.sign(si3[k-1])
     # ss4[k] = si4[k] + alpha1*si4[k-1] + alpha2*np.sign(si4[k-1])
+
+    if k == 1:
+        ss1[1] =0
+        ss2[1] =0
+        ss3[1] =0
+        ss4[1] =0
+
+    else:
+        ss1[k+1] = si1[k+1] + alpha1 * si1[k]
+        ss2[k+1] = si2[k+1] + alpha1 * si2[k]
+        ss3[k+1] = si3[k+1] + alpha1 * si3[k]
+        ss4[k+1] = si4[k+1] + alpha1 * si4[k]
+
 
     if k == 1:
         ss1[1] =0
