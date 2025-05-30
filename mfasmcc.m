@@ -72,15 +72,15 @@ omega4 = zeros(m, 1);
 w5 = zeros(1, m);  % example length, adjust as needed
 w6 = zeros(1, m);  % example length, adjust as needed
 
-% % Set w5 values according to conditions
-% w5(1:165)     = 1.4;
-% w5(166:330)   = 1.6;
-% w5(331:end)   = 1.3;
+% Set w5 values according to conditions
+w5(1:165)     = 1.4;
+w5(166:330)   = 1.6;
+w5(331:end)   = 1.3;
 
-% % Set w6 values according to conditions
-% w6(1:165)     = 0.7;
-% w6(166:330)   = 1.2;
-% w6(331:end)   = 1.1;
+% Set w6 values according to conditions
+w6(1:165)     = 0.7;
+w6(166:330)   = 1.2;
+w6(331:end)   = 1.1;
 
 
 % Time vector for sinusoidal signals
@@ -98,8 +98,8 @@ w6 = zeros(1, m);  % example length, adjust as needed
 % w6 = 1.2 + 0.25 * sin(0.1 * t + 0.01 * t.^2 + pi/3); % Same chirp, phase shift = pi/3
 
 % Variation 6: Mixed sinusoidal and constant signal
-w5 = 1.5 + 0.2 * sin(0.3 * t); % Amplitude = 0.2, frequency = 0.3 rad/s, offset = 1.5
-w6 = 1.2 * 0.2 * sin(0.3 * t); % Constant signal at 0.8different offset
+% w5 = 1.5 + 0.2 * sin(0.3 * t); % Amplitude = 0.2, frequency = 0.3 rad/s, offset = 1.5
+% w6 = 1.2 * 0.2 * sin(0.3 * t); % Constant signal at 0.8different offset
 for k = 1:m
 
     if k == 1
@@ -268,6 +268,7 @@ title('System Outputs and Leader Signals');
 xlabel('Iteration (k)');
 ylabel('Value');
 legend('show');
+ylim([0 1.8]);
 grid on;
 
 
