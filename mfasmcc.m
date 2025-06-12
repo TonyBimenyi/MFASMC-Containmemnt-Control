@@ -68,7 +68,8 @@ omega2 = zeros(m, 1);
 omega3 = zeros(m, 1);
 omega4 = zeros(m, 1);
 
-% Preallocate arrays (adjust size if needed)
+%Time Invarying Leaders signals (w5, w6)
+% % Preallocate arrays (adjust size if needed)
 % w5 = zeros(1, m);  % example length, adjust as needed
 % w6 = zeros(1, m);  % example length, adjust as needed
 
@@ -93,13 +94,7 @@ t = (k-1) * T; % Time vector: t = (k-1)*T
 w5 = 0.5 + 0.25 * sin(0.1 * t); % Amplitude = 0.25, frequency = 0.1 rad/s, offset = 1.15
 w6 = 0.5 + 0.25 * sin(0.1 * t + pi/2); % Same amplitude and frequency, phase shift = pi/2
 
-% % Variation 2: Different frequencies and amplitudes
-% w5 = 1.2 + 0.3 * sin(0.15 * t); % Amplitude = 0.3, frequency = 0.15 rad/s
-% w6 = 1.1 + 0.2 * sin(0.3 * t); % Amplitude = 0.2, frequency = 0.3 rad/s
 
-% Variation 3: Higher frequency with phase shift and different offsets
-% w5 = 1.3 + 0.2 * sin(0.5 * t); % Amplitude = 0.2, frequency = 0.5 rad/s
-% w6 = 1.0 + 0.2 * sin(0.5 * t + pi/4); % Same frequency, phase shift = pi/4, different offset
 for k = 1:m
 
     if k == 1
@@ -234,20 +229,20 @@ for k = 1:m
     y4(k + 1) = m / (rT * 0.3) * u4(k);
     % Ensure y values do not exceed bounds (example, adjust as needed)
  
-    y1(k) = max(0, min(1, y1(k)));
-    y2(k) = max(0, min(1, y2(k)));
-    y3(k) = max(0, min(1, y3(k)));
-    y4(k) = max(0, min(1, y4(k)));
-    % Ensure u values do not exceed bounds (example, adjust as needed)
-    u1(k) = max(0, min(1, u1(k)));
-    u2(k) = max(0, min(1, u2(k)));
-    u3(k) = max(0, min(1, u3(k)));
-    u4(k) = max(0, min(1, u4(k)));
-    % Ensure phi values do not exceed bounds (example, adjust as needed)
-    phi1(k) = max(0, min(1, phi1(k)));
-    phi2(k) = max(0, min(1, phi2(k)));
-    phi3(k) = max(0, min(1, phi3(k)));
-    phi4(k) = max(0, min(1, phi4(k)));
+    % y1(k) = max(0, min(1, y1(k)));
+    % y2(k) = max(0, min(1, y2(k)));
+    % y3(k) = max(0, min(1, y3(k)));
+    % y4(k) = max(0, min(1, y4(k)));
+    % % Ensure u values do not exceed bounds (example, adjust as needed)
+    % u1(k) = max(0, min(1, u1(k)));
+    % u2(k) = max(0, min(1, u2(k)));
+    % u3(k) = max(0, min(1, u3(k)));
+    % u4(k) = max(0, min(1, u4(k)));
+    % % Ensure phi values do not exceed bounds (example, adjust as needed)
+    % phi1(k) = max(0, min(1, phi1(k)));
+    % phi2(k) = max(0, min(1, phi2(k)));
+    % phi3(k) = max(0, min(1, phi3(k)));
+    % phi4(k) = max(0, min(1, phi4(k)));
 
     % Plotting
 
