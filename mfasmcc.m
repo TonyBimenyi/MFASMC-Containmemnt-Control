@@ -64,7 +64,7 @@ zoom_x_start = 38;  % Start of zoomed-in x-range
 zoom_x_end = 40;    % End of zoomed-in x-range
 
 % === Create figure ===
-figure('Name', 'Outputs for Different \lambda (Piecewise Leaders)', 'Position', [100, 100, 1350, 800]);
+figure('Name', 'Outputs for Different \lambda (Piecewise Leaders)', 'Position', [100, 100, 1350, 750]);
 
 for i = 1:4
     lambda = lambda_values(i);
@@ -76,12 +76,13 @@ for i = 1:4
         beta, sigma, tau, nena, rT);
 
     subplot(2, 2, i);
-    plot(k, w5, 'c--', 'LineWidth', 2, 'DisplayName', 'w5'); hold on;
-    plot(k, w6, 'k--', 'LineWidth', 2, 'DisplayName', 'w6');
-    plot(t, y1(1:m+1), 'b-', 'LineWidth', 2, 'DisplayName', 'y1');
+    
+    plot(t, y1(1:m+1), 'b-', 'LineWidth', 2, 'DisplayName', 'y1'); hold on;
     plot(t, y2(1:m+1), 'r-', 'LineWidth', 2, 'DisplayName', 'y2');
     plot(t, y3(1:m+1), 'g-', 'LineWidth', 2, 'DisplayName', 'y3');
     plot(t, y4(1:m+1), 'm-', 'LineWidth', 2, 'DisplayName', 'y4');
+    plot(k, w5, 'c--', 'LineWidth', 2, 'DisplayName', 'w5'); 
+    plot(k, w6, 'k--', 'LineWidth', 2, 'DisplayName', 'w6');
     hold off;
 
     title(['\lambda = ', num2str(lambda)], 'FontSize', font_size);
