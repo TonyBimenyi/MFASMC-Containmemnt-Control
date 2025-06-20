@@ -91,30 +91,30 @@ for i = 1:4
     set(gca, 'FontSize', font_size);
     xlim([0 m]);
     ylim([0 1.65]);
-    grid on;
+    grid off;
 
     % === Zoomed Axes Positions ===
-    if i == 1
-        zoom_pos = [0.21, 0.62, 0.13, 0.09];
-    elseif i == 2
-        zoom_pos = [0.62, 0.76, 0.13, 0.10];
-    elseif i == 3
-        zoom_pos = [0.18, 0.287, 0.13, 0.10];
-    else
-        zoom_pos = [0.62, 0.287, 0.13, 0.10];
-    end
+    % if i == 1
+    %     zoom_pos = [0.21, 0.62, 0.13, 0.09];
+    % elseif i == 2
+    %     zoom_pos = [0.62, 0.76, 0.13, 0.10];
+    % elseif i == 3
+    %     zoom_pos = [0.18, 0.287, 0.13, 0.10];
+    % else
+    %     zoom_pos = [0.62, 0.287, 0.13, 0.10];
+    % end
 
     % === Zoomed Axes ===
-    ax_zoom = axes('Position', zoom_pos);
-    box on; hold on;
-    plot(k, w5, 'c--', 'LineWidth', 2);
-    plot(k, w6, 'k--', 'LineWidth', 2);
-    plot(t, y1(1:m+1), 'b-', 'LineWidth', 2);
-    plot(t, y2(1:m+1), 'r-', 'LineWidth', 2);
-    plot(t, y3(1:m+1), 'g-', 'LineWidth', 2);
-    plot(t, y4(1:m+1), 'm-', 'LineWidth', 2);
-    xlim([zoom_x_start zoom_x_end]);
-    set(gca, 'FontSize', font_size);
+    % ax_zoom = axes('Position', zoom_pos);
+    % box on; hold on;
+    % plot(k, w5, 'c--', 'LineWidth', 2);
+    % plot(k, w6, 'k--', 'LineWidth', 2);
+    % plot(t, y1(1:m+1), 'b-', 'LineWidth', 2);
+    % plot(t, y2(1:m+1), 'r-', 'LineWidth', 2);
+    % plot(t, y3(1:m+1), 'g-', 'LineWidth', 2);
+    % plot(t, y4(1:m+1), 'm-', 'LineWidth', 2);
+    % xlim([zoom_x_start zoom_x_end]);
+    % set(gca, 'FontSize', font_size);
 end
 
 % Third figure: Sinusoidal leader signals
