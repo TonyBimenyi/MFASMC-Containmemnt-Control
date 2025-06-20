@@ -94,7 +94,7 @@ for i = 1:4
     ylim([0 1.9]);
     grid off;
 
-    % === Zoomed Axes Positions ===
+    % % === Zoomed Axes Positions ===
     % if i == 1
     %     zoom_pos = [0.21, 0.62, 0.13, 0.09];
     % elseif i == 2
@@ -105,7 +105,7 @@ for i = 1:4
     %     zoom_pos = [0.62, 0.287, 0.13, 0.10];
     % end
 
-    % === Zoomed Axes ===
+    % % === Zoomed Axes ===
     % ax_zoom = axes('Position', zoom_pos);
     % box on; hold on;
     % plot(k, w5, 'c--', 'LineWidth', 2);
@@ -115,6 +115,7 @@ for i = 1:4
     % plot(t, y3(1:m+1), 'g-', 'LineWidth', 2);
     % plot(t, y4(1:m+1), 'm-', 'LineWidth', 2);
     % xlim([zoom_x_start zoom_x_end]);
+    % ylim([0 4.5])
     % set(gca, 'FontSize', font_size);
 end
 
