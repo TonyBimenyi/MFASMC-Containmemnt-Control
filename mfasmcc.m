@@ -118,6 +118,7 @@ for i = 1:4
     % set(gca, 'FontSize', font_size);
 end
 
+
 % Third figure: Sinusoidal leader signals
 % figure('Name', 'System Outputs with Sinusoidal Leader Signals');
 % lambda = 100; % Fixed lambda

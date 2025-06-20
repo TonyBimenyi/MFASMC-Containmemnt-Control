@@ -4,7 +4,7 @@ clc; clear;
 
 rho = 10.5;
 eta = 5;
-lamda = 100;
+lamda = 200;
 mu = 80.5;
 epsilon = 1e-5;
 alpha = 1;
@@ -76,12 +76,12 @@ w6 = zeros(1, m);  % example length, adjust as needed
 % Set w5 values according to conditions
 w5(1:165)     = 1.4;
 w5(166:330)   = 1.6;
-w5(331:end)   = 1.3;
+w5(331:end)   = 1.1;
 
 % Set w6 values according to conditions
 w6(1:165)     = 0.7;
 w6(166:330)   = 1.2;
-w6(331:end)   = 1.1;
+w6(331:end)   = 0.8;
 
 
 % % Time vector for sinusoidal signals
@@ -252,24 +252,78 @@ for k = 1:m
 
 end
 
-% Time vector for plotting (assuming k represents discrete time steps)
+% Time vector
 k = 1:m;
 
-% Plot system outputs (y1, y2, y3, y4) and leaders (w5, w6)
-figure;
-plot(k, xi1(1:m), 'b-', 'LineWidth', 2.5, 'DisplayName', 'y1');
-hold on;
-plot(k, xi2(1:m), 'r-', 'LineWidth', 2.5, 'DisplayName', 'y2');
-plot(k, xi3(1:m), 'g-', 'LineWidth', 2.5, 'DisplayName', 'y3');
-plot(k, xi4(1:m), 'm-', 'LineWidth', 2.5, 'DisplayName', 'y4');
-% plot(k, w5, 'c--', 'LineWidth', 2.5, 'DisplayName', 'w5');
-% plot(k, w6, 'k--', 'LineWidth', 2.5, 'DisplayName', 'w6');
-hold off;
-title('System Outputs and Leader Signals');
-xlabel('Iteration (k)');
-ylabel('Value');
-legend('show');
+% Create a main figure window
+figure('Position', [100, 100, 1350, 750]);
+
+% Define zoom range (adjust as needed)
+zoomStart = 100;
+zoomEnd = 300;
+zommed_fontsize = 14;
+
+% Agent 1
+subplot(2,2,1);
+plot(k, xi1(1:m), 'b', 'LineWidth', 2);
+title('Agent 1', 'FontSize', 14);
+xlabel('Iteration (k)', 'FontSize', 14);
+ylabel('\xi_1(k)', 'FontSize', 14);
+legend('\xi_1(k)', 'FontSize', 12);
 grid on;
+set(gca, 'FontSize', 14);
+% Zoom inset
+axes('Position', [0.25 0.72 0.1 0.1]);
+box on;
+plot(k(zoomStart:zoomEnd), xi1(zoomStart:zoomEnd), 'b', 'LineWidth', 1.5);
+title('Zoom', 'FontSize', 10);
+set(gca, 'FontSize', 10);
+
+
+% Agent 2
+subplot(2,2,2);
+plot(k, xi2(1:m), 'r', 'LineWidth', 2);
+title('Agent 2', 'FontSize', 14);
+xlabel('Iteration (k)', 'FontSize', 14);
+ylabel('\xi_2(k)', 'FontSize', 14);
+legend('\xi_2(k)', 'FontSize', 12);
+grid on;
+set(gca, 'FontSize', 14);
+axes('Position', [0.7 0.72 0.1 0.1]);
+box on;
+plot(k(zoomStart:zoomEnd), xi2(zoomStart:zoomEnd), 'r', 'LineWidth', 1.5);
+title('Zoom', 'FontSize', 10);
+set(gca, 'FontSize', 10);
+
+% Agent 3
+subplot(2,2,3);
+plot(k, xi3(1:m), 'g', 'LineWidth', 2);
+title('Agent 3', 'FontSize', 14);
+xlabel('Iteration (k)', 'FontSize', 14);
+ylabel('\xi_3(k)', 'FontSize', 14);
+legend('\xi_3(k)', 'FontSize', 12);
+grid on;
+set(gca, 'FontSize', 14);
+axes('Position', [0.25 0.25 0.1 0.1]);
+box on;
+plot(k(zoomStart:zoomEnd), xi3(zoomStart:zoomEnd), 'g', 'LineWidth', 1.5);
+title('Zoom', 'FontSize', 10);
+set(gca, 'FontSize', 10);
+
+% Agent 4
+subplot(2,2,4);
+plot(k, xi4(1:m), 'm', 'LineWidth', 2);
+title('Agent 4', 'FontSize', 14);
+xlabel('Iteration (k)', 'FontSize', 14);
+ylabel('\xi_4(k)', 'FontSize', 14);
+legend('\xi_4(k)', 'FontSize', 12);
+grid on;
+set(gca, 'FontSize', 14);
+axes('Position', [0.7 0.25 0.1 0.1]);
+box on;
+plot(k(zoomStart:zoomEnd), xi4(zoomStart:zoomEnd), 'm', 'LineWidth', 1.5);
+title('Zoom', 'FontSize', 10);
+set(gca, 'FontSize', 10);
 
 
 
