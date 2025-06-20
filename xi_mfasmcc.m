@@ -259,9 +259,9 @@ k = 1:m;
 figure('Position', [100, 100, 1350, 750]);
 
 % Define zoom range (adjust as needed)
-zoomStart = 100;
-zoomEnd = 300;
-zommed_fontsize = 14;
+zoomStart = 320;
+zoomEnd = 380;
+zoomed_fontsize = 14;
 
 % Agent 1
 subplot(2,2,1);
@@ -273,11 +273,10 @@ legend('\xi_1(k)', 'FontSize', 12);
 grid on;
 set(gca, 'FontSize', 14);
 % Zoom inset
-axes('Position', [0.25 0.72 0.1 0.1]);
+axes('Position', [0.27 0.74 0.13 0.11]);
 box on;
 plot(k(zoomStart:zoomEnd), xi1(zoomStart:zoomEnd), 'b', 'LineWidth', 1.5);
-title('Zoom', 'FontSize', 10);
-set(gca, 'FontSize', 10);
+set(gca, 'FontSize', zoomed_fontsize);
 
 
 % Agent 2
@@ -289,11 +288,11 @@ ylabel('\xi_2(k)', 'FontSize', 14);
 legend('\xi_2(k)', 'FontSize', 12);
 grid on;
 set(gca, 'FontSize', 14);
-axes('Position', [0.7 0.72 0.1 0.1]);
+axes('Position', [0.73 0.74 0.13 0.11]);
+ylim([-0.2 0.5]);
 box on;
 plot(k(zoomStart:zoomEnd), xi2(zoomStart:zoomEnd), 'r', 'LineWidth', 1.5);
-title('Zoom', 'FontSize', 10);
-set(gca, 'FontSize', 10);
+set(gca, 'FontSize', zoomed_fontsize);
 
 % Agent 3
 subplot(2,2,3);
@@ -304,11 +303,11 @@ ylabel('\xi_3(k)', 'FontSize', 14);
 legend('\xi_3(k)', 'FontSize', 12);
 grid on;
 set(gca, 'FontSize', 14);
-axes('Position', [0.25 0.25 0.1 0.1]);
+axes('Position', [0.27 0.25 0.13 0.11]);
 box on;
 plot(k(zoomStart:zoomEnd), xi3(zoomStart:zoomEnd), 'g', 'LineWidth', 1.5);
-title('Zoom', 'FontSize', 10);
-set(gca, 'FontSize', 10);
+
+set(gca, 'FontSize', zoomed_fontsize);
 
 % Agent 4
 subplot(2,2,4);
@@ -319,11 +318,10 @@ ylabel('\xi_4(k)', 'FontSize', 14);
 legend('\xi_4(k)', 'FontSize', 12);
 grid on;
 set(gca, 'FontSize', 14);
-axes('Position', [0.7 0.25 0.1 0.1]);
+axes('Position', [0.73 0.265 0.13 0.11]);
 box on;
 plot(k(zoomStart:zoomEnd), xi4(zoomStart:zoomEnd), 'm', 'LineWidth', 1.5);
-title('Zoom', 'FontSize', 10);
-set(gca, 'FontSize', 10);
+set(gca, 'FontSize', zoomed_fontsize);
 
 
 

@@ -88,10 +88,10 @@ for i = 1:4
     title(['\lambda = ', num2str(lambda)], 'FontSize', font_size);
     xlabel('Time Step (k)', 'FontSize', font_size);
     ylabel('Output', 'FontSize', font_size);
-    legend('show', 'Location', 'southeast', 'Orientation', 'vertical');
+    legend('show', 'Location', 'north', 'Orientation', 'horizontal');
     set(gca, 'FontSize', font_size);
     xlim([0 m]);
-    ylim([0 1.65]);
+    ylim([0 1.9]);
     grid off;
 
     % === Zoomed Axes Positions ===
@@ -161,7 +161,7 @@ function [y1, y2, y3, y4, w5, w6] = run_simulation(lambda, w5_eq, w6_eq, leader_
         w5 = zeros(1, m);
         w6 = zeros(1, m);
         w5(1:165) = 1.4; w5(166:330) = 1.6; w5(331:end) = 1.1;
-        w6(1:165) = 0.7; w6(166:330) = 1.2; w6(331:end) = 0.8;
+        w6(1:165) = 0.6; w6(166:330) = 1.2; w6(331:end) = 0.8;
     else % sinusoidal
         w5 = eval(w5_eq);
         w6 = eval(w6_eq);
