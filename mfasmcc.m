@@ -22,7 +22,7 @@ m = 500;
 n = 600;
 
 % Lambda values for subplot
-lambda_values = [50, 100, 150, 200];
+lambda_values = [75, 100, 120, 200];
 
 % Time vector for plotting
 k = 1:m;
@@ -32,6 +32,7 @@ t = (k-1) * T;
 figure('Name', 'System Outputs for Different Lambda Values (Sinusoidal Leaders)');
 w5_eq = '0.5 + 0.25 * sin(0.1 * t)';
 w6_eq = '0.5 + 0.25 * sin(0.1 * t + pi/2)';
+
 leader_type = 'sinusoidal';
 
 for i = 1:4
@@ -53,47 +54,89 @@ for i = 1:4
     grid on;
 end
 
-% Second figure: Time-invariant leader signals
-figure('Name', 'System Outputs with Time-Invariant Leader Signals');
-lambda = 100; % Fixed lambda
-w5_eq = ''; % Not used for piecewise
-w6_eq = ''; % Not used for piecewise
-leader_type = 'piecewise';
-[y1, y2, y3, y4, w5, w6] = run_simulation(lambda, w5_eq, w6_eq, leader_type, m, T, rho, eta, mu, epsilon, alpha, gamma1, gamma2, gamma3, gamma4, beta, sigma, tau, nena, rT);
+% === Setup ===
+lambda_values = [75, 100, 120, 200];
+t = 1:m+1;         % Time for y outputs
+k = 1:m;           % Time for leader signals
+font_size = 14;
 
-plot(k, y1(1:m), 'b-', 'LineWidth', 2, 'DisplayName', 'y1'); hold on;
-plot(k, y2(1:m), 'r-', 'LineWidth', 2, 'DisplayName', 'y2');
-plot(k, y3(1:m), 'g-', 'LineWidth', 2, 'DisplayName', 'y3');
-plot(k, y4(1:m), 'm-', 'LineWidth', 2, 'DisplayName', 'y4');
-plot(k, w5, 'c--', 'LineWidth', 2, 'DisplayName', 'w5 (piecewise)');
-plot(k, w6, 'k--', 'LineWidth', 2, 'DisplayName', 'w6 (piecewise)');
-hold off;
-title('System Outputs with Time-Invariant Leader Signals');
-xlabel('Iteration (k)');
-ylabel('Value');
-legend('show');
-grid on;
+zoom_x_start = 38;  % Start of zoomed-in x-range
+zoom_x_end = 40;    % End of zoomed-in x-range
+
+% === Create figure ===
+figure('Name', 'Outputs for Different \lambda (Piecewise Leaders)', 'Position', [100, 100, 1350, 1000]);
+
+for i = 1:4
+    lambda = lambda_values(i);
+    w5_eq = ''; w6_eq = '';
+    leader_type = 'piecewise';
+
+    [y1, y2, y3, y4, w5, w6] = run_simulation(lambda, w5_eq, w6_eq, leader_type, ...
+        m, T, rho, eta, mu, epsilon, alpha, gamma1, gamma2, gamma3, gamma4, ...
+        beta, sigma, tau, nena, rT);
+
+    subplot(2, 2, i);
+    plot(k, w5, 'c--', 'LineWidth', 2, 'DisplayName', 'w5'); hold on;
+    plot(k, w6, 'k--', 'LineWidth', 2, 'DisplayName', 'w6');
+    plot(t, y1(1:m+1), 'b-', 'LineWidth', 2, 'DisplayName', 'y1');
+    plot(t, y2(1:m+1), 'r-', 'LineWidth', 2, 'DisplayName', 'y2');
+    plot(t, y3(1:m+1), 'g-', 'LineWidth', 2, 'DisplayName', 'y3');
+    plot(t, y4(1:m+1), 'm-', 'LineWidth', 2, 'DisplayName', 'y4');
+    hold off;
+
+    title(['\lambda = ', num2str(lambda)], 'FontSize', font_size);
+    xlabel('Time Step (k)', 'FontSize', font_size);
+    ylabel('Output', 'FontSize', font_size);
+    legend('show', 'Location', 'southoutside', 'Orientation', 'horizontal');
+    set(gca, 'FontSize', font_size);
+    xlim([0 m]);
+    ylim([0 1.65]);
+    grid on;
+
+    % === Zoomed Axes Positions ===
+    if i == 1
+        zoom_pos = [0.18, 0.76, 0.13, 0.10];
+    elseif i == 2
+        zoom_pos = [0.62, 0.76, 0.13, 0.10];
+    elseif i == 3
+        zoom_pos = [0.18, 0.287, 0.13, 0.10];
+    else
+        zoom_pos = [0.62, 0.287, 0.13, 0.10];
+    end
+
+    % === Zoomed Axes ===
+    ax_zoom = axes('Position', zoom_pos);
+    box on; hold on;
+    plot(k, w5, 'c--', 'LineWidth', 2);
+    plot(k, w6, 'k--', 'LineWidth', 2);
+    plot(t, y1(1:m+1), 'b-', 'LineWidth', 2);
+    plot(t, y2(1:m+1), 'r-', 'LineWidth', 2);
+    plot(t, y3(1:m+1), 'g-', 'LineWidth', 2);
+    plot(t, y4(1:m+1), 'm-', 'LineWidth', 2);
+    xlim([zoom_x_start zoom_x_end]);
+    set(gca, 'FontSize', font_size);
+end
 
 % Third figure: Sinusoidal leader signals
-figure('Name', 'System Outputs with Sinusoidal Leader Signals');
-lambda = 100; % Fixed lambda
-w5_eq = '0.5 + 0.25 * sin(0.1 * t)';
-w6_eq = '0.5 + 0.25 * sin(0.1 * t + pi/2)';
-leader_type = 'sinusoidal';
-[y1, y2, y3, y4, w5, w6] = run_simulation(lambda, w5_eq, w6_eq, leader_type, m, T, rho, eta, mu, epsilon, alpha, gamma1, gamma2, gamma3, gamma4, beta, sigma, tau, nena, rT);
+% figure('Name', 'System Outputs with Sinusoidal Leader Signals');
+% lambda = 100; % Fixed lambda
+% w5_eq = '0.5 + 0.25 * sin(0.1 * t)';
+% w6_eq = '0.5 + 0.25 * sin(0.1 * t + pi/2)';
+% leader_type = 'sinusoidal';
+% [y1, y2, y3, y4, w5, w6] = run_simulation(lambda, w5_eq, w6_eq, leader_type, m, T, rho, eta, mu, epsilon, alpha, gamma1, gamma2, gamma3, gamma4, beta, sigma, tau, nena, rT);
 
-plot(k, y1(1:m), 'b-', 'LineWidth', 2, 'DisplayName', 'y1'); hold on;
-plot(k, y2(1:m), 'r-', 'LineWidth', 2, 'DisplayName', 'y2');
-plot(k, y3(1:m), 'g-', 'LineWidth', 2, 'DisplayName', 'y3');
-plot(k, y4(1:m), 'm-', 'LineWidth', 2, 'DisplayName', 'y4');
-plot(k, w5, 'c--', 'LineWidth', 2, 'DisplayName', 'w5 (sin, f=0.1)');
-plot(k, w6, 'k--', 'LineWidth', 2, 'DisplayName', 'w6 (sin, f=0.1, \phi=\pi/2)');
-hold off;
-title('System Outputs with Sinusoidal Leader Signals');
-xlabel('Iteration (k)');
-ylabel('Value');
-legend('show');
-grid on;
+% plot(k, y1(1:m), 'b-', 'LineWidth', 2, 'DisplayName', 'y1'); hold on;
+% plot(k, y2(1:m), 'r-', 'LineWidth', 2, 'DisplayName', 'y2');
+% plot(k, y3(1:m), 'g-', 'LineWidth', 2, 'DisplayName', 'y3');
+% plot(k, y4(1:m), 'm-', 'LineWidth', 2, 'DisplayName', 'y4');
+% plot(k, w5, 'c--', 'LineWidth', 2, 'DisplayName', 'w5 (sin, f=0.1)');
+% plot(k, w6, 'k--', 'LineWidth', 2, 'DisplayName', 'w6 (sin, f=0.1, \phi=\pi/2)');
+% hold off;
+% title('System Outputs with Sinusoidal Leader Signals');
+% xlabel('Iteration (k)');
+% ylabel('Value');
+% legend('show');
+% grid on;
 
 % Function to run simulation with given parameters
 function [y1, y2, y3, y4, w5, w6] = run_simulation(lambda, w5_eq, w6_eq, leader_type, m, T, rho, eta, mu, epsilon, alpha, gamma1, gamma2, gamma3, gamma4, beta, sigma, tau, nena, rT)
@@ -115,8 +158,8 @@ function [y1, y2, y3, y4, w5, w6] = run_simulation(lambda, w5_eq, w6_eq, leader_
     if strcmp(leader_type, 'piecewise')
         w5 = zeros(1, m);
         w6 = zeros(1, m);
-        w5(1:165) = 1.4; w5(166:330) = 1.6; w5(331:end) = 1.3;
-        w6(1:165) = 0.7; w6(166:330) = 1.2; w6(331:end) = 1.1;
+        w5(1:165) = 1.4; w5(166:330) = 1.6; w5(331:end) = 1.1;
+        w6(1:165) = 0.7; w6(166:330) = 1.2; w6(331:end) = 0.8;
     else % sinusoidal
         w5 = eval(w5_eq);
         w6 = eval(w6_eq);
