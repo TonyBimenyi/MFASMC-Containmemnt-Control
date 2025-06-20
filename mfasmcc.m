@@ -64,7 +64,7 @@ zoom_x_start = 38;  % Start of zoomed-in x-range
 zoom_x_end = 40;    % End of zoomed-in x-range
 
 % === Create figure ===
-figure('Name', 'Outputs for Different \lambda (Piecewise Leaders)', 'Position', [100, 100, 1350, 1000]);
+figure('Name', 'Outputs for Different \lambda (Piecewise Leaders)', 'Position', [100, 100, 1350, 800]);
 
 for i = 1:4
     lambda = lambda_values(i);
@@ -87,7 +87,7 @@ for i = 1:4
     title(['\lambda = ', num2str(lambda)], 'FontSize', font_size);
     xlabel('Time Step (k)', 'FontSize', font_size);
     ylabel('Output', 'FontSize', font_size);
-    legend('show', 'Location', 'southoutside', 'Orientation', 'horizontal');
+    legend('show', 'Location', 'southeast', 'Orientation', 'vertical');
     set(gca, 'FontSize', font_size);
     xlim([0 m]);
     ylim([0 1.65]);
@@ -95,7 +95,7 @@ for i = 1:4
 
     % === Zoomed Axes Positions ===
     if i == 1
-        zoom_pos = [0.18, 0.76, 0.13, 0.10];
+        zoom_pos = [0.21, 0.62, 0.13, 0.09];
     elseif i == 2
         zoom_pos = [0.62, 0.76, 0.13, 0.10];
     elseif i == 3
