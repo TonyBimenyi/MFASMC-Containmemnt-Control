@@ -95,6 +95,7 @@ w5 = 0.5 + 0.25 * sin(0.1 * t); % Amplitude = 0.25, frequency = 0.1 rad/s, offse
 w6 = 0.5 + 0.25 * sin(0.1 * t + pi/2); % Same amplitude and frequency, phase shift = pi/2
 
 
+
 for k = 1:m
 
     if k == 1
