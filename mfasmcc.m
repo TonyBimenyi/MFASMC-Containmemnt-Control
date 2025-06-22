@@ -3,7 +3,7 @@ clc; clear;
 % Parameters
 rho = 10.5;
 eta = 5;
-lamda = 100;
+lamda = 150;
 mu = 80.5;
 epsilon = 1e-5;
 alpha = 1;
@@ -51,11 +51,12 @@ for i = 1:4
     xlabel('Iteration (k)');
     ylabel('Value');
     legend('show');
-    grid on;
+    grid off;
 end
 
+
 % === Setup ===
-lambda_values = [75, 100, 120, 200];
+lambda_values = [75, 100, 115, 150];
 t = 1:m+1;         % Time for y outputs
 k = 1:m;           % Time for leader signals
 font_size = 14;
@@ -93,6 +94,8 @@ for i = 1:4
     xlim([0 m]);
     ylim([0 1.9]);
     grid off;
+
+    
 
     % % === Zoomed Axes Positions ===
     % if i == 1
@@ -272,4 +275,17 @@ function [y1, y2, y3, y4, w5, w6] = run_simulation(lambda, w5_eq, w6_eq, leader_
         y3(k+1) = m / (rT * 0.1) * u3(k);
         y4(k+1) = m / (rT * 0.3) * u4(k);
     end
+% Compute and print MSE for xi_i(k)
+mse_xi1 = mean((xi1).^2);
+mse_xi2 = mean((xi2).^2);
+mse_xi3 = mean((xi3).^2);
+mse_xi4 = mean((xi4).^2);
+
+fprintf('Lambda = %d:\n', lambda);
+fprintf('  MSE of xi1 = %.6f\n', mse_xi1);
+fprintf('  MSE of xi2 = %.6f\n', mse_xi2);
+fprintf('  MSE of xi3 = %.6f\n', mse_xi3);
+fprintf('  MSE of xi4 = %.6f\n\n', mse_xi4);
+
+
 end
