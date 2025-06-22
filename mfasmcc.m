@@ -22,14 +22,14 @@ m = 500;
 n = 600;
 
 % Lambda values for subplot
-lambda_values = [75, 100, 120, 200];
+lambda_values = [75, 100, 120, 150];
 
 % Time vector for plotting
 k = 1:m;
 t = (k-1) * T;
 
 % First figure: 2x2 subplot for different lambda values with sinusoidal leaders
-figure('Name', 'System Outputs for Different Lambda Values (Sinusoidal Leaders)');
+figure('Name', 'Outputs for Different \lambda (Piecewise Leaders)', 'Position', [100, 100, 1350, 750]);
 w5_eq = '0.5 + 0.25 * sin(0.1 * t)';
 w6_eq = '0.5 + 0.25 * sin(0.1 * t + pi/2)';
 
@@ -40,17 +40,18 @@ for i = 1:4
     [y1, y2, y3, y4, w5, w6] = run_simulation(lambda, w5_eq, w6_eq, leader_type, m, T, rho, eta, mu, epsilon, alpha, gamma1, gamma2, gamma3, gamma4, beta, sigma, tau, nena, rT);
     
     subplot(2, 2, i);
-    plot(k, y1(1:m), 'b-', 'LineWidth', 2, 'DisplayName', 'y1'); hold on;
-    plot(k, y2(1:m), 'r-', 'LineWidth', 2, 'DisplayName', 'y2');
-    plot(k, y3(1:m), 'g-', 'LineWidth', 2, 'DisplayName', 'y3');
-    plot(k, y4(1:m), 'm-', 'LineWidth', 2, 'DisplayName', 'y4');
-    plot(k, w5, 'c--', 'LineWidth', 2, 'DisplayName', 'w5 (sin, f=0.1)');
-    plot(k, w6, 'k--', 'LineWidth', 2, 'DisplayName', 'w6 (sin, f=0.1, \phi=\pi/2)');
+    plot(k, y1(1:m), 'b-', 'LineWidth', 2, 'DisplayName', 'y1(k)'); hold on;
+    plot(k, y2(1:m), 'r-', 'LineWidth', 2, 'DisplayName', 'y2(k)');
+    plot(k, y3(1:m), 'g-', 'LineWidth', 2, 'DisplayName', 'y3(k)');
+    plot(k, y4(1:m), 'm-', 'LineWidth', 2, 'DisplayName', 'y4(k)');
+    plot(k, w5, 'c--', 'LineWidth', 2, 'DisplayName', 'w5(k)');
+    plot(k, w6, 'k--', 'LineWidth', 2, 'DisplayName', 'w6(k)');
     hold off;
     title(['\lambda = ', num2str(lambda)]);
     xlabel('Iteration (k)');
     ylabel('Value');
-    legend('show');
+    ylim([0 1.9]);
+    legend('show', 'Location', 'north', 'Orientation', 'horizontal');
     grid off;
 end
 
