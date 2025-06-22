@@ -70,29 +70,29 @@ omega4 = zeros(m, 1);
 
 %Time Invarying Leaders signals (w5, w6)
 % % Preallocate arrays (adjust size if needed)
-w5 = zeros(1, m);  % example length, adjust as needed
-w6 = zeros(1, m);  % example length, adjust as needed
+% w5 = zeros(1, m);  % example length, adjust as needed
+% w6 = zeros(1, m);  % example length, adjust as needed
 
-% Set w5 values according to conditions
-w5(1:165)     = 1.4;
-w5(166:330)   = 1.6;
-w5(331:end)   = 1.1;
+% % Set w5 values according to conditions
+% w5(1:165)     = 1.4;
+% w5(166:330)   = 1.6;
+% w5(331:end)   = 1.1;
 
-% Set w6 values according to conditions
-w6(1:165)     = 0.7;
-w6(166:330)   = 1.2;
-w6(331:end)   = 0.8;
+% % Set w6 values according to conditions
+% w6(1:165)     = 0.7;
+% w6(166:330)   = 1.2;
+% w6(331:end)   = 0.8;
 
 
-% % Time vector for sinusoidal signals
-% k = 1:m;
-% t = (k-1) * T; % Time vector: t = (k-1)*T
+% Time vector for sinusoidal signals
+k = 1:m;
+t = (k-1) * T; % Time vector: t = (k-1)*T
 
-% % Define sinusoidal leader signals (choose one of the variations below)
+% Define sinusoidal leader signals (choose one of the variations below)
 
-% % Variation 1: Low-frequency, same amplitude, phase-shifted signals
-% w5 = 0.5 + 0.25 * sin(0.1 * t); % Amplitude = 0.25, frequency = 0.1 rad/s, offset = 1.15
-% w6 = 0.5 + 0.25 * sin(0.1 * t + pi/2); % Same amplitude and frequency, phase shift = pi/2
+% Variation 1: Low-frequency, same amplitude, phase-shifted signals
+w5 = 0.5 + 0.25 * sin(0.1 * t); % Amplitude = 0.25, frequency = 0.1 rad/s, offset = 1.15
+w6 = 0.5 + 0.25 * sin(0.1 * t + pi/2); % Same amplitude and frequency, phase shift = pi/2
 
 
 for k = 1:m
@@ -259,8 +259,8 @@ k = 1:m;
 figure('Position', [100, 100, 1350, 750]);
 
 % Define zoom range (adjust as needed)
-zoomStart = 320;
-zoomEnd = 380;
+zoomStart = 300;
+zoomEnd = m;
 zoomed_fontsize = 14;
 
 % Agent 1
@@ -272,11 +272,14 @@ ylabel('Output', 'FontSize', 14);
 legend('\xi_1(k)', 'FontSize', 12);
 grid off;
 set(gca, 'FontSize', 14);
+
 % Zoom inset
 axes('Position', [0.27 0.74 0.13 0.11]);
 box on;
 plot(k(zoomStart:zoomEnd), xi1(zoomStart:zoomEnd), 'b', 'LineWidth', 1.5);
+ylim([-0.01 0.01]);  % <-- added line
 set(gca, 'FontSize', zoomed_fontsize);
+
 
 
 % Agent 2
@@ -292,6 +295,7 @@ axes('Position', [0.73 0.74 0.13 0.11]);
 ylim([-0.2 0.5]);
 box on;
 plot(k(zoomStart:zoomEnd), xi2(zoomStart:zoomEnd), 'r', 'LineWidth', 1.5);
+ylim([-0.01 0.01]);  % <-- added line
 set(gca, 'FontSize', zoomed_fontsize);
 
 % Agent 3
@@ -306,7 +310,7 @@ set(gca, 'FontSize', 14);
 axes('Position', [0.27 0.25 0.13 0.11]);
 box on;
 plot(k(zoomStart:zoomEnd), xi3(zoomStart:zoomEnd), 'g', 'LineWidth', 1.5);
-
+ylim([-0.05 0.05]);  % <-- added line
 set(gca, 'FontSize', zoomed_fontsize);
 
 % Agent 4
@@ -321,6 +325,7 @@ set(gca, 'FontSize', 14);
 axes('Position', [0.73 0.265 0.13 0.11]);
 box on;
 plot(k(zoomStart:zoomEnd), xi4(zoomStart:zoomEnd), 'm', 'LineWidth', 1.5);
+ylim([-0.05 0.05]);  % <-- added line
 set(gca, 'FontSize', zoomed_fontsize);
 
 
