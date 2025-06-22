@@ -32,6 +32,7 @@ t = (k-1) * T;
 figure('Name', 'Outputs for Different \lambda (Piecewise Leaders)', 'Position', [100, 100, 1350, 750]);
 w5_eq = '0.5 + 0.25 * sin(0.1 * t)';
 w6_eq = '0.5 + 0.25 * sin(0.1 * t + pi/2)';
+font_size = 14;
 
 leader_type = 'sinusoidal';
 
@@ -46,12 +47,13 @@ for i = 1:4
     plot(k, y4(1:m), 'm-', 'LineWidth', 2, 'DisplayName', 'y4(k)');
     plot(k, w5, 'c--', 'LineWidth', 2, 'DisplayName', 'w5(k)');
     plot(k, w6, 'k--', 'LineWidth', 2, 'DisplayName', 'w6(k)');
+    ylim([0 0.9]);
     hold off;
     title(['\lambda = ', num2str(lambda)]);
     xlabel('Iteration (k)');
     ylabel('Value');
-    ylim([0 1.9]);
     legend('show', 'Location', 'north', 'Orientation', 'horizontal');
+    set(gca, 'FontSize', font_size);
     grid off;
 end
 
