@@ -46,9 +46,9 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
 
     plot(ch1_data, '-.m', 'LineWidth', 2, 'MarkerSize', 5.5, 'DisplayName', 'Motor1');
   
-    plot(ch4_data, '-', 'LineWidth', 2, 'Color', 'red', 'MarkerSize', 2.5, 'DisplayName', 'Motor 2');
+    plot(ch4_data, 'r-', 'LineWidth', 2, 'MarkerSize', 2.5, 'DisplayName', 'Motor 2');
 
-    plot(ch5_data, '-.', 'LineWidth', 2, 'Color', 'green', 'MarkerSize', 5.5, 'DisplayName', 'Motor 3');
+    plot(ch5_data, '--', 'LineWidth', 2, 'Color', 'green', 'MarkerSize', 5.5, 'DisplayName', 'Motor 3');
     hold off;
     
     % Set plot limits and labels
@@ -60,7 +60,7 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
     set(gca, 'FontSize', 14);
     
     % Add legend
-    legend('show','orientation','horizontal');
+    legend('show','location','north','orientation','horizontal');
 
     zoom_x_start = 940; % Start of zoomed x-range
     zoom_x_end = 980; % End of zoomed x-range
@@ -71,7 +71,7 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
     plot(ch1_data, '-.m', 'LineWidth', 2.5);
 
     plot(ch4_data, '-r', 'LineWidth', 2.5);
-    plot(ch4_data, '-.g', 'LineWidth', 2.5);
+    plot(ch4_data, '--g', 'LineWidth', 2.5);
     xlim([zoom_x_start zoom_x_end]);
     % yticks([-0.4,0,0.2]);
     set(gca, 'FontSize', 14);
