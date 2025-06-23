@@ -12,6 +12,7 @@ ch3_data_match = regexp(file_content, 'CH3_Data_OutPut\[\d+\]=\{(.*?)\};', 'toke
 ch1_data_match = regexp(file_content, 'CH1_Data_OutPut\[\d+\]=\{(.*?)\};', 'tokens', 'dotall');
 ch2_data_match = regexp(file_content, 'CH2_Data_OutPut\[\d+\]=\{(.*?)\};', 'tokens', 'dotall');
 ch4_data_match = regexp(file_content, 'CH4_Data_OutPut\[\d+\]=\{(.*?)\};', 'tokens', 'dotall');
+ch5_data_match = regexp(file_content, 'CH4_Data_OutPut\[\d+\]=\{(.*?)\};', 'tokens', 'dotall');
 
 if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_match) && ~isempty(ch4_data_match)
     % Convert the extracted data to numerical arrays
@@ -19,6 +20,7 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
     ch1_data = str2num(ch1_data_match{1}{1});
     ch2_data = str2num(ch2_data_match{1}{1});
     ch4_data = str2num(ch4_data_match{1}{1});
+    ch5_data = str2num(ch5_data_match{1}{1});
     
     % Calculate distributed errors (xi)
     xi1 = ch2_data - ch1_data; % Error for Motor 1
@@ -37,11 +39,13 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
     
     % Plot the data
     figure('Position', [100, 100, 800, 400]);
-    plot(ch2_data, '-', 'LineWidth', 2, 'Color', 'blue', 'MarkerSize', 4.5, 'DisplayName', 'Reference Trajectory');
+    plot(ch2_data, '-', 'LineWidth', 2, 'Color', 'blue', 'MarkerSize', 4.5, 'DisplayName', 'Leader 1');
     hold on;
     plot(ch1_data, '-.m', 'LineWidth', 2, 'MarkerSize', 5.5, 'DisplayName', 'Motor1');
     plot(ch3_data, '-', 'LineWidth', 2, 'Color', 'red', 'MarkerSize', 2.5, 'DisplayName', 'Motor 2');
     plot(ch4_data, '-.', 'LineWidth', 2, 'Color', 'green', 'MarkerSize', 0.5, 'DisplayName', 'Motor 3');
+
+    plot(ch5_data, '-.', 'LineWidth', 2, 'Color', 'black', 'MarkerSize', 0.5, 'DisplayName', 'Leader 2');
     hold off;
     
     % Set plot limits and labels
@@ -55,9 +59,9 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
     % Add legend
     legend('show','orientation','horizontal');
 
-    zoom_x_start = 75; % Start of zoomed x-range
-    zoom_x_end = 105; % End of zoomed x-range
-    axes('Position', [0.23,0.555,0.30,0.25]);
+    zoom_x_start = 940; % Start of zoomed x-range
+    zoom_x_end = 980; % End of zoomed x-range
+    axes('Position', [0.23,0.577,0.30,0.25]);
     box on; hold on;
     plot(ch2_data, '-b', 'LineWidth', 2.5);
     plot(ch1_data, '-.m', 'LineWidth', 2.5);
