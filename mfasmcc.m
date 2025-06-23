@@ -1,7 +1,7 @@
 clc; clear;
 
 % Parameters
-rho = 12.5;
+rho = 10.5;
 eta = 5;
 lamda = 200;
 mu = 80.5;

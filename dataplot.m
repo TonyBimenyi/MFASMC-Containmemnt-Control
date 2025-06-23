@@ -38,14 +38,17 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
     fprintf('MSE for Motor 3 (CH2 - CH4): %.10e\n', mse3);
     
     % Plot the data
-    figure('Position', [100, 100, 800, 400]);
-    plot(ch2_data, '-', 'LineWidth', 2, 'Color', 'blue', 'MarkerSize', 4.5, 'DisplayName', 'Leader 1');
+    figure('Position', [100, 100, 800, 500]);
+    plot(ch2_data, 'b--', 'LineWidth', 2, 'MarkerSize', 4.5, 'DisplayName', 'Leader 1');
     hold on;
-    plot(ch1_data, '-.m', 'LineWidth', 2, 'MarkerSize', 5.5, 'DisplayName', 'Motor1');
-    plot(ch3_data, '-', 'LineWidth', 2, 'Color', 'red', 'MarkerSize', 2.5, 'DisplayName', 'Motor 2');
-    plot(ch4_data, '-.', 'LineWidth', 2, 'Color', 'green', 'MarkerSize', 0.5, 'DisplayName', 'Motor 3');
 
-    plot(ch5_data, '-.', 'LineWidth', 2, 'Color', 'black', 'MarkerSize', 0.5, 'DisplayName', 'Leader 2');
+    plot(ch3_data, '--', 'LineWidth', 2, 'Color', 'black', 'MarkerSize', 2.5, 'DisplayName', 'Motor 2');
+    
+    plot(ch1_data, '-.m', 'LineWidth', 2, 'MarkerSize', 5.5, 'DisplayName', 'Motor1');
+  
+    plot(ch4_data, '--', 'LineWidth', 2, 'Color', 'green', 'MarkerSize', 2.5, 'DisplayName', 'Motor 3');
+
+    plot(ch5_data, '-.', 'LineWidth', 2, 'Color', 'green', 'MarkerSize', 0.5, 'DisplayName', 'Leader 2');
     hold off;
     
     % Set plot limits and labels
