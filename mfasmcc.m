@@ -1,9 +1,9 @@
 clc; clear;
 
 % Parameters
-rho = 10.5;
+rho = 12.5;
 eta = 5;
-lamda = 150;
+lamda = 200;
 mu = 80.5;
 epsilon = 1e-5;
 alpha = 1;
