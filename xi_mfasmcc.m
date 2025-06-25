@@ -4,7 +4,7 @@ clc; clear;
 
 rho = 10.5;
 eta = 5;
-lamda = 150;
+lamda = 120;
 mu = 80.5;
 epsilon = 1e-5;
 alpha = 1;
@@ -69,30 +69,30 @@ omega3 = zeros(m, 1);
 omega4 = zeros(m, 1);
 
 %Time Invarying Leaders signals (w5, w6)
-% % Preallocate arrays (adjust size if needed)
-% w5 = zeros(1, m);  % example length, adjust as needed
-% w6 = zeros(1, m);  % example length, adjust as needed
+% Preallocate arrays (adjust size if needed)
+w5 = zeros(1, m);  % example length, adjust as needed
+w6 = zeros(1, m);  % example length, adjust as needed
 
-% % Set w5 values according to conditions
-% w5(1:165)     = 1.4;
-% w5(166:330)   = 1.6;
-% w5(331:end)   = 1.1;
+% Set w5 values according to conditions
+w5(1:165)     = 1.4;
+w5(166:330)   = 1.6;
+w5(331:end)   = 1.1;
 
-% % Set w6 values according to conditions
-% w6(1:165)     = 0.7;
-% w6(166:330)   = 1.2;
-% w6(331:end)   = 0.8;
+% Set w6 values according to conditions
+w6(1:165)     = 0.7;
+w6(166:330)   = 1.2;
+w6(331:end)   = 0.8;
 
 
-% Time vector for sinusoidal signals
-k = 1:m;
-t = (k-1) * T; % Time vector: t = (k-1)*T
+% % Time vector for sinusoidal signals
+% k = 1:m;
+% t = (k-1) * T; % Time vector: t = (k-1)*T
 
-% Define sinusoidal leader signals (choose one of the variations below)
+% % Define sinusoidal leader signals (choose one of the variations below)
 
-% Variation 1: Low-frequency, same amplitude, phase-shifted signals
-w5 = 0.5 + 0.25 * sin(0.1 * t); % Amplitude = 0.25, frequency = 0.1 rad/s, offset = 1.15
-w6 = 0.5 + 0.25 * sin(0.1 * t + pi/2); % Same amplitude and frequency, phase shift = pi/2
+% % Variation 1: Low-frequency, same amplitude, phase-shifted signals
+% w5 = 0.5 + 0.25 * sin(0.1 * t); % Amplitude = 0.25, frequency = 0.1 rad/s, offset = 1.15
+% w6 = 0.5 + 0.25 * sin(0.1 * t + pi/2); % Same amplitude and frequency, phase shift = pi/2
 
 
 
@@ -270,7 +270,7 @@ plot(k, xi1(1:m), 'b', 'LineWidth', 2);
 title('Agent 1', 'FontSize', 14);
 xlabel('Time step (k)', 'FontSize', 14);
 ylabel('Output', 'FontSize', 14);
-legend('\xi_1(k)', 'FontSize', 12);
+legend('\Xi_1(k)', 'FontSize', 12);
 grid off;
 set(gca, 'FontSize', 14);
 
@@ -289,7 +289,7 @@ plot(k, xi2(1:m), 'r', 'LineWidth', 2);
 title('Agent 2', 'FontSize', 14);
 xlabel('Time step (k)', 'FontSize', 14);
 ylabel('Output', 'FontSize', 14);
-legend('\xi_2(k)', 'FontSize', 12);
+legend('\Xi_2(k)', 'FontSize', 12);
 grid off;
 set(gca, 'FontSize', 14);
 axes('Position', [0.73 0.74 0.13 0.11]);
@@ -305,10 +305,10 @@ plot(k, xi3(1:m), 'g', 'LineWidth', 2);
 title('Agent 3', 'FontSize', 14);
 xlabel('Time step (k)', 'FontSize', 14);
 ylabel('Output', 'FontSize', 14);
-legend('\xi_3(k)', 'FontSize', 12);
+legend('\Xi_3(k)', 'FontSize', 12);
 grid off;
 set(gca, 'FontSize', 14);
-axes('Position', [0.27 0.25 0.13 0.11]);
+axes('Position', [0.28 0.27 0.13 0.11]);
 box on;
 plot(k(zoomStart:zoomEnd), xi3(zoomStart:zoomEnd), 'g', 'LineWidth', 1.5);
 ylim([-0.05 0.05]);  % <-- added line
@@ -320,7 +320,7 @@ plot(k, xi4(1:m), 'm', 'LineWidth', 2);
 title('Agent 4', 'FontSize', 14);
 xlabel('Time step (k)', 'FontSize', 14);
 ylabel('Output', 'FontSize', 14);
-legend('\xi_4(k)', 'FontSize', 12);
+legend('\Xi_4(k)', 'FontSize', 12);
 grid off;
 set(gca, 'FontSize', 14);
 axes('Position', [0.73 0.265 0.13 0.11]);

@@ -81,12 +81,12 @@ for i = 1:4
 
     subplot(2, 2, i);
     
-    plot(t, y1(1:m+1), 'b-', 'LineWidth', 2, 'DisplayName', 'y1'); hold on;
-    plot(t, y2(1:m+1), 'r-', 'LineWidth', 2, 'DisplayName', 'y2');
-    plot(t, y3(1:m+1), 'g-', 'LineWidth', 2, 'DisplayName', 'y3');
-    plot(t, y4(1:m+1), 'm-', 'LineWidth', 2, 'DisplayName', 'y4');
-    plot(k, w5, 'c--', 'LineWidth', 2, 'DisplayName', 'w5'); 
-    plot(k, w6, 'k--', 'LineWidth', 2, 'DisplayName', 'w6');
+    plot(t, y1(1:m+1), 'b-', 'LineWidth', 2, 'DisplayName', 'y1(k)'); hold on;
+    plot(t, y2(1:m+1), 'r-', 'LineWidth', 2, 'DisplayName', 'y2(k)');
+    plot(t, y3(1:m+1), 'g-', 'LineWidth', 2, 'DisplayName', 'y3(k)');
+    plot(t, y4(1:m+1), 'm-', 'LineWidth', 2, 'DisplayName', 'y4(k)');
+    plot(k, w5, 'c--', 'LineWidth', 2, 'DisplayName', 'w5(k)'); 
+    plot(k, w6, 'k--', 'LineWidth', 2, 'DisplayName', 'w6(k)');
     hold off;
 
     title(['\lambda = ', num2str(lambda)], 'FontSize', font_size);
