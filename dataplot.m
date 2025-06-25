@@ -60,7 +60,7 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
     set(gca, 'FontSize', 14);
     
     % Add legend
-    legend('show','location','north','orientation','horizontal');
+    legend('show','location','','orientation','horizontal');
 
     zoom_x_start = 940; % Start of zoomed x-range
     zoom_x_end = 980; % End of zoomed x-range

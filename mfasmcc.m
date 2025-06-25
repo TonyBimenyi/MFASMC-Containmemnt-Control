@@ -22,7 +22,7 @@ m = 500;
 n = 600;
 
 % Lambda values for subplot
-lambda_values = [75, 100, 120, 150];
+lambda_values = [75, 80, 85, 120];
 
 % Time vector for plotting
 k = 1:m;
@@ -50,8 +50,8 @@ for i = 1:4
     ylim([0 0.9]);
     hold off;
     title(['\lambda = ', num2str(lambda)]);
-    xlabel('Iteration (k)');
-    ylabel('Value');
+    xlabel('Time step (k)');
+    ylabel('Output');
     legend('show', 'Location', 'north', 'Orientation', 'horizontal');
     set(gca, 'FontSize', font_size);
     grid off;
@@ -59,7 +59,7 @@ end
 
 
 % === Setup ===
-lambda_values = [75, 100, 115, 150];
+lambda_values = [75, 80, 85, 120];
 t = 1:m+1;         % Time for y outputs
 k = 1:m;           % Time for leader signals
 font_size = 14;
@@ -276,7 +276,7 @@ function [y1, y2, y3, y4, w5, w6] = run_simulation(lambda, w5_eq, w6_eq, leader_
         y1(k+1) = m / (rT * 0.1) * u1(k);
         y2(k+1) = m / (rT * 0.1) * u2(k);
         y3(k+1) = m / (rT * 0.1) * u3(k);
-        y4(k+1) = m / (rT * 0.3) * u4(k);
+        y4(k+1) = m / (rT * 0.2) * u4(k);
     end
 % Compute and print MSE for xi_i(k)
 mse_xi1 = mean((xi1).^2);
