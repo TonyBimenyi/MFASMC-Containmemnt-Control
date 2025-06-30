@@ -50,17 +50,21 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
 
     plot(ch5_data, '--', 'LineWidth', 2, 'Color', 'green', 'MarkerSize', 5.5, 'DisplayName', 'Motor 3');
     hold off;
+      % Add legend
+      legend('show','location','north','orientation','horizontal');
     
     % Set plot limits and labels
     xlim([600, 1400]);
     ylim([20, 85]);
     % xlabel('Time step', 'FontSize', 14);
     % ylabel('Output', 'FontSize', 14);
+    
     % ylim([-1.5 3]); % Y-axis limits for Agent 4
     set(gca, 'FontSize', 14);
     
-    % Add legend
-    legend('show','location','','orientation','horizontal');
+  
+    xlabel('Time step(k)', 'FontSize', 14);
+    ylabel('Output', 'FontSize', 14);
 
     zoom_x_start = 940; % Start of zoomed x-range
     zoom_x_end = 980; % End of zoomed x-range
@@ -73,8 +77,10 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
     plot(ch4_data, '-r', 'LineWidth', 2.5);
     plot(ch4_data, '--g', 'LineWidth', 2.5);
     xlim([zoom_x_start zoom_x_end]);
+
     % yticks([-0.4,0,0.2]);
     set(gca, 'FontSize', 14);
+    
     
     % Save the plot
     print('-dpng', 'motor_plot.png');
