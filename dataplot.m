@@ -38,7 +38,7 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
     fprintf('MSE for Motor 3 (CH2 - CH4): %.10e\n', mse3);
     
     % Plot the data
-    figure('Position', [100, 100, 800, 500]);
+    figure('Position', [100, 100, 800, 450]);
     plot(ch2_data, 'b--', 'LineWidth', 2, 'MarkerSize', 4.5, 'DisplayName', 'Leader 1');
     hold on;
 
@@ -55,31 +55,31 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
     
     % Set plot limits and labels
     xlim([600, 1400]);
-    ylim([20, 85]);
+    ylim([20, 60]);
     % xlabel('Time step', 'FontSize', 14);
     % ylabel('Output', 'FontSize', 14);
     
     % ylim([-1.5 3]); % Y-axis limits for Agent 4
-    set(gca, 'FontSize', 14);
+
     
   
-    xlabel('Time step(k)', 'FontSize', 14);
-    ylabel('Output', 'FontSize', 14);
+    xlabel('Time step (k)', 'FontSize', 20);
+    ylabel('Tracking performance', 'FontSize', 20);
 
-    zoom_x_start = 940; % Start of zoomed x-range
-    zoom_x_end = 980; % End of zoomed x-range
-    axes('Position', [0.23,0.577,0.30,0.25]);
-    box on; hold on;
-    plot(ch2_data, '--b', 'LineWidth', 2.5);
-    plot(ch3_data, '--k', 'LineWidth', 2.5);
-    plot(ch1_data, '-.m', 'LineWidth', 2.5);
+    % zoom_x_start = 940; % Start of zoomed x-range
+    % zoom_x_end = 980; % End of zoomed x-range
+    % axes('Position', [0.23,0.577,0.30,0.25]);
+    % box on; hold on;
+    % plot(ch2_data, '--b', 'LineWidth', 2.5);
+    % plot(ch3_data, '--k', 'LineWidth', 2.5);
+    % plot(ch1_data, '-.m', 'LineWidth', 2.5);
 
-    plot(ch4_data, '-r', 'LineWidth', 2.5);
-    plot(ch4_data, '--g', 'LineWidth', 2.5);
-    xlim([zoom_x_start zoom_x_end]);
+    % plot(ch4_data, '-r', 'LineWidth', 2.5);
+    % plot(ch4_data, '--g', 'LineWidth', 2.5);
+    % xlim([zoom_x_start zoom_x_end]);
 
     % yticks([-0.4,0,0.2]);
-    set(gca, 'FontSize', 14);
+    set(gca, 'FontSize', 20);
     
     
     % Save the plot
