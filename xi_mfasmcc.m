@@ -257,22 +257,23 @@ end
 k = 1:m;
 
 % Create a main figure window
-figure('Position', [100, 100, 1350, 750]);
+figure('Position', [100, 100, 1500, 800]);
 
 % Define zoom range (adjust as needed)
-zoomStart = 300;
+zoomStart = 400;
 zoomEnd = m;
-zoomed_fontsize = 14;
+zoomed_fontsize = 20;
+font_size = 20;
 
 % Agent 1
 subplot(2,2,1);
 plot(k, xi1(1:m), 'b', 'LineWidth', 2);
-title('Agent 1', 'FontSize', 14);
-xlabel('Time step (k)', 'FontSize', 14);
-ylabel('Output', 'FontSize', 14);
-legend('\Xi_1(k)', 'FontSize', 12);
+title('Agent 1', 'FontSize', font_size);
+xlabel('Time step (k)', 'FontSize', font_size);
+ylabel('Containment error', 'FontSize', font_size);
+legend('\Xi_1(k)', 'FontSize', font_size);
 grid off;
-set(gca, 'FontSize', 14);
+set(gca, 'FontSize', font_size);
 
 % Zoom inset
 axes('Position', [0.27 0.74 0.13 0.11]);
@@ -286,12 +287,12 @@ set(gca, 'FontSize', zoomed_fontsize);
 % Agent 2
 subplot(2,2,2);
 plot(k, xi2(1:m), 'r', 'LineWidth', 2);
-title('Agent 2', 'FontSize', 14);
-xlabel('Time step (k)', 'FontSize', 14);
-ylabel('Output', 'FontSize', 14);
-legend('\Xi_2(k)', 'FontSize', 12);
+title('Agent 2', 'FontSize', font_size);
+xlabel('Time step (k)', 'FontSize', font_size);
+ylabel('Containment error', 'FontSize', font_size);
+legend('\Xi_2(k)', 'FontSize', font_size);
 grid off;
-set(gca, 'FontSize', 14);
+set(gca, 'FontSize', font_size);
 axes('Position', [0.73 0.74 0.13 0.11]);
 ylim([-0.2 0.5]);
 box on;
@@ -302,12 +303,12 @@ set(gca, 'FontSize', zoomed_fontsize);
 % Agent 3
 subplot(2,2,3);
 plot(k, xi3(1:m), 'g', 'LineWidth', 2);
-title('Agent 3', 'FontSize', 14);
-xlabel('Time step (k)', 'FontSize', 14);
-ylabel('Output', 'FontSize', 14);
-legend('\Xi_3(k)', 'FontSize', 12);
+title('Agent 3', 'FontSize', font_size);
+xlabel('Time step (k)', 'FontSize', font_size);
+ylabel('Containment error', 'FontSize', font_size);
+legend('\Xi_3(k)', 'FontSize', font_size);
 grid off;
-set(gca, 'FontSize', 14);
+set(gca, 'FontSize', font_size);
 axes('Position', [0.28 0.27 0.13 0.11]);
 box on;
 plot(k(zoomStart:zoomEnd), xi3(zoomStart:zoomEnd), 'g', 'LineWidth', 1.5);
@@ -317,12 +318,12 @@ set(gca, 'FontSize', zoomed_fontsize);
 % Agent 4
 subplot(2,2,4);
 plot(k, xi4(1:m), 'm', 'LineWidth', 2);
-title('Agent 4', 'FontSize', 14);
-xlabel('Time step (k)', 'FontSize', 14);
-ylabel('Output', 'FontSize', 14);
-legend('\Xi_4(k)', 'FontSize', 12);
+title('Agent 4', 'FontSize', font_size);
+xlabel('Time step (k)', 'FontSize', font_size);
+ylabel('Containment error', 'FontSize', font_size);
+legend('\Xi_4(k)', 'FontSize', font_size);
 grid off;
-set(gca, 'FontSize', 14);
+set(gca, 'FontSize', font_size);
 axes('Position', [0.73 0.265 0.13 0.11]);
 box on;
 plot(k(zoomStart:zoomEnd), xi4(zoomStart:zoomEnd), 'm', 'LineWidth', 1.5);
