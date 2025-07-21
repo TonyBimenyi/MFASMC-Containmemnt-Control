@@ -61,10 +61,12 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
     
     % ylim([-1.5 3]); % Y-axis limits for Agent 4
 
+    font_size = 16;
+
     
   
-    xlabel('Time step (k)', 'FontSize', 20);
-    ylabel('Tracking performance', 'FontSize', 20);
+    xlabel('Time step (k)', 'FontSize', font_size);
+    ylabel('Tracking performance', 'FontSize', font_size);
 
     % zoom_x_start = 940; % Start of zoomed x-range
     % zoom_x_end = 980; % End of zoomed x-range
@@ -79,7 +81,7 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
     % xlim([zoom_x_start zoom_x_end]);
 
     % yticks([-0.4,0,0.2]);
-    set(gca, 'FontSize', 20);
+    set(gca, 'FontSize', font_size);
     
     
     % Save the plot
