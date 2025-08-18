@@ -322,7 +322,7 @@ plot(k, xi4(1:m), 'm', 'LineWidth', 2);
 title('Agent 1','FontSize',font_size,'FontName',font_family);
 xlabel('Time step (k)','FontSize',font_size,'FontName',font_family);
 ylabel('Containment error','FontSize',font_size,'FontName',font_family);
-legend('\Xi_1(k)','FontSize',font_size,'FontName',font_family);
+legend('\Xi_4(k)','FontSize',font_size,'FontName',font_family);
 set(gca,'FontSize',font_size,'FontName',font_family);
 
 grid off;
