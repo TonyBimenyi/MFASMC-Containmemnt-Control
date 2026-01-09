@@ -39,14 +39,14 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
     
     % Plot the data
     figure('Position', [100, 100, 800, 450]);
-    plot(ch2_data, 'b--', 'LineWidth', 2, 'MarkerSize', 4.5, 'DisplayName', 'Leader 1');
+    plot(ch2_data, 'b-', 'LineWidth', 2, 'MarkerSize', 4.5, 'DisplayName', 'Leader 1');
     hold on;
 
-    plot(ch3_data, '--', 'LineWidth', 2, 'Color', 'black', 'MarkerSize', 2.5, 'DisplayName', 'Leader 2');
+    plot(ch3_data, '-', 'LineWidth', 2, 'Color', 'black', 'MarkerSize', 2.5, 'DisplayName', 'Leader 2');
 
     plot(ch1_data, '-.m', 'LineWidth', 2, 'MarkerSize', 5.5, 'DisplayName', 'Motor1');
   
-    plot(ch4_data, 'r-', 'LineWidth', 2, 'MarkerSize', 2.5, 'DisplayName', 'Motor 2');
+    plot(ch4_data, 'r-.', 'LineWidth', 2, 'MarkerSize', 2.5, 'DisplayName', 'Motor 2');
 
     plot(ch5_data, '--', 'LineWidth', 2, 'Color', 'green', 'MarkerSize', 5.5, 'DisplayName', 'Motor 3');
     hold off;
@@ -54,7 +54,10 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
       legend('show','location','north','orientation','horizontal');
     
     % Set plot limits and labels
-    xlim([600, 1400]);
+    xlim([585, 1400]);
+    % xticks(0:200:400);
+    xticks([585 785 985 1185 1385]);          % actual data x-values
+    xticklabels({'0', '200', '400', '600', '800'});  % what you want displayed
     ylim([20, 60]);
     % xlabel('Time step', 'FontSize', 14);
     % ylabel('Output', 'FontSize', 14);
@@ -62,11 +65,12 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
     % ylim([-1.5 3]); % Y-axis limits for Agent 4
 
     font_size = 16;
+    font_family = 'Times New Roman';
 
     
   
-    xlabel('Time step (k)', 'FontSize', font_size);
-    ylabel('Tracking performance', 'FontSize', font_size);
+    xlabel('Time step (k)', 'FontSize', font_size,'FontName',font_family);
+    ylabel('Tracking performance', 'FontSize', font_size,'FontName',font_family);
 
     % zoom_x_start = 940; % Start of zoomed x-range
     % zoom_x_end = 980; % End of zoomed x-range
@@ -81,7 +85,7 @@ if ~isempty(ch3_data_match) && ~isempty(ch1_data_match) && ~isempty(ch2_data_mat
     % xlim([zoom_x_start zoom_x_end]);
 
     % yticks([-0.4,0,0.2]);
-    set(gca, 'FontSize', font_size);
+    set(gca, 'FontSize', font_size,'FontName',font_family);
     
     
     % Save the plot

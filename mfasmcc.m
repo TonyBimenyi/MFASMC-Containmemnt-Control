@@ -29,10 +29,11 @@ k = 1:m;
 t = (k-1) * T;
 
 % First figure: 2x2 subplot for different lambda values with sinusoidal leaders
-figure('Name', 'Outputs for Different \lambda (Piecewise Leaders)', 'Position', [100, 100, 1500, 800]);
+figure('Name', 'Outputs for Different \lambda (Piecewise Leaders)', 'Position', [100, 100, 1000, 550]);
 w5_eq = '0.5 + 0.25 * sin(0.1 * t)';
 w6_eq = '0.5 + 0.25 * sin(0.1 * t + pi/2)';
-font_size = 20;
+font_size = 21;
+font_family = 'Times New Roman';
 
 leader_type = 'sinusoidal';
 
@@ -40,7 +41,7 @@ for i = 1:4
     lambda = lambda_values(i);
     [y1, y2, y3, y4, w5, w6] = run_simulation(lambda, w5_eq, w6_eq, leader_type, m, T, rho, eta, mu, epsilon, alpha, gamma1, gamma2, gamma3, gamma4, beta, sigma, tau, nena, rT);
     
-    subplot(2, 2, i);
+    % subplot(2, 2, i);
     plot(k, y1(1:m), 'b-', 'LineWidth', 2, 'DisplayName', 'y_1(k)'); hold on;
     plot(k, y2(1:m), 'r-', 'LineWidth', 2, 'DisplayName', 'y_2(k)');
     plot(k, y3(1:m), 'g-', 'LineWidth', 2, 'DisplayName', 'y_3(k)');
@@ -49,11 +50,11 @@ for i = 1:4
     plot(k, w6, 'k--', 'LineWidth', 2, 'DisplayName', 'w_6(k)');
     ylim([0 1]);
     hold off;
-    title(['\lambda = ', num2str(lambda)]);
+    % title(['\lambda = ', num2str(lambda)]);
     xlabel('Time step (k)');
     ylabel('Tracking performance');
     legend('show', 'Location', 'north', 'Orientation', 'horizontal');
-    set(gca, 'FontSize', font_size);
+    set(gca, 'FontSize', font_size,'FontName',font_family);
     grid off;
 end
 
@@ -63,12 +64,13 @@ lambda_values = [75, 80, 85, 120];
 t = 1:m+1;         % Time for y outputs
 k = 1:m;           % Time for leader signals
 font_size = 20;
+font_family = 'Times New Roman';
 
 zoom_x_start = 38;  % Start of zoomed-in x-range
 zoom_x_end = 40;    % End of zoomed-in x-range
 
 % === Create figure ===
-figure('Name', 'Outputs for Different \lambda (Piecewise Leaders)', 'Position', [100, 100, 1500, 800]);
+figure('Name', 'Outputs for Different \lambda (Piecewise Leaders)', 'Position', [100, 100, 1000, 550]);
 
 for i = 1:4
     lambda = lambda_values(i);
@@ -79,7 +81,7 @@ for i = 1:4
         m, T, rho, eta, mu, epsilon, alpha, gamma1, gamma2, gamma3, gamma4, ...
         beta, sigma, tau, nena, rT);
 
-    subplot(2, 2, i);
+    % subplot(2, 2, i);
     
     plot(t, y1(1:m+1), 'b-', 'LineWidth', 2, 'DisplayName', 'y_1(k)'); hold on;
     plot(t, y2(1:m+1), 'r-', 'LineWidth', 2, 'DisplayName', 'y_2(k)');
@@ -89,11 +91,11 @@ for i = 1:4
     plot(k, w6, 'k--', 'LineWidth', 2, 'DisplayName', 'w_6(k)');
     hold off;
 
-    title(['\lambda = ', num2str(lambda)], 'FontSize', font_size);
-    xlabel('Time step (k)', 'FontSize', font_size);
-    ylabel('Tracking performance', 'FontSize', font_size);
+    % title(['\lambda = ', num2str(lambda)], 'FontSize', font_size,'FontName',font_family);
+    xlabel('Time step (k)', 'FontSize', font_size,'FontName',font_family);
+    ylabel('Tracking performance', 'FontSize', font_size,'FontName',font_family);
     legend('show', 'Location', 'north', 'Orientation', 'horizontal');
-    set(gca, 'FontSize', font_size);
+    set(gca, 'FontSize', font_size,'FontName',font_family);
     xlim([0 m]);
     ylim([0 2.1]);
     grid off;

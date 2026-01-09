@@ -83,6 +83,9 @@ w6(1:165)     = 0.7;
 w6(166:330)   = 1.2;
 w6(331:end)   = 0.8;
 
+% Variation 1: Low-frequency, same amplitude, phase-shifted signals
+
+
 
 % % Time vector for sinusoidal signals
 % k = 1:m;
@@ -257,7 +260,7 @@ end
 k = 1:m;
 
 % Create a main figure window
-figure('Position', [100, 100, 1500, 800]);
+figure('Position', [100, 100, 1000, 550]);
 
 % Define zoom range (adjust as needed)
 zoomStart = 400;
@@ -267,71 +270,38 @@ font_size = 20;
 font_family = 'Times New Roman';
 
 % Agent 1
-subplot(2,2,1);
-plot(k, xi1(1:m), 'b', 'LineWidth', 2);
-title('Agent 1', 'FontSize', font_size,'FontName',font_family);
-xlabel('Time step (k)', 'FontSize', font_size,'FontName',font_family);
-ylabel('Containment error', 'FontSize', font_size,'FontName',font_family);
-legend('\Xi_1(k)', 'FontSize', font_size,'FontName',font_family);
-grid off;
-set(gca, 'FontSize', font_size,'FontName',font_family);
+% subplot(2,2,1);
+% === Combined Containment Error Plot for All Agents ===
 
-% Zoom inset
-axes('Position', [0.27 0.74 0.13 0.11]);
-box on;
-plot(k(zoomStart:zoomEnd), xi1(zoomStart:zoomEnd), 'b', 'LineWidth', 1.5);
-ylim([-0.01 0.01]);  % <-- added line
-set(gca, 'FontSize', zoomed_fontsize,'FontName',font_family);
-
-
-
-% Agent 2
-subplot(2,2,2);
+plot(k, xi1(1:m), 'b', 'LineWidth', 2); hold on;
 plot(k, xi2(1:m), 'r', 'LineWidth', 2);
-title('Agent 2', 'FontSize', font_size,'FontName',font_family);
-xlabel('Time step (k)', 'FontSize', font_size,'FontName',font_family);
-ylabel('Containment error', 'FontSize', font_size,'FontName',font_family);
-legend('\Xi_2(k)', 'FontSize', font_size,'FontName',font_family);
-grid off;
-set(gca, 'FontSize', font_size,'FontName',font_family);
-axes('Position', [0.73 0.74 0.13 0.11]);
-ylim([-0.2 0.5]);
-box on;
-plot(k(zoomStart:zoomEnd), xi2(zoomStart:zoomEnd), 'r', 'LineWidth', 1.5);
-ylim([-0.01 0.01]);  % <-- added line
-set(gca, 'FontSize', zoomed_fontsize,'FontName',font_family);
-
-% Agent 3
-subplot(2,2,3);
 plot(k, xi3(1:m), 'g', 'LineWidth', 2);
-title('Agent 3', 'FontSize', font_size,'FontName',font_family);
-xlabel('Time step (k)', 'FontSize', font_size,'FontName',font_family);
-ylabel('Containment error', 'FontSize', font_size,'FontName',font_family);
-legend('\Xi_3(k)', 'FontSize', font_size,'FontName',font_family);
-grid off;
-set(gca, 'FontSize', font_size,'FontName',font_family);
-axes('Position', [0.28 0.27 0.13 0.11]);
-box on;
-plot(k(zoomStart:zoomEnd), xi3(zoomStart:zoomEnd), 'g', 'LineWidth', 1.5);
-ylim([-0.05 0.05]);  % <-- added line
-set(gca, 'FontSize', zoomed_fontsize,'FontName',font_family);
-
-% Agent 4
-subplot(2,2,4);
 plot(k, xi4(1:m), 'm', 'LineWidth', 2);
-title('Agent 1','FontSize',font_size,'FontName',font_family);
-xlabel('Time step (k)','FontSize',font_size,'FontName',font_family);
-ylabel('Containment error','FontSize',font_size,'FontName',font_family);
-legend('\Xi_4(k)','FontSize',font_size,'FontName',font_family);
-set(gca,'FontSize',font_size,'FontName',font_family);
+
+% Main labels and title
+% title('Containment Errors of All Agents', 'FontSize', font_size, 'FontName', font_family);
+xlabel('Time step (k)', 'FontSize', font_size, 'FontName', font_family);
+ylabel('Containment error', 'FontSize', font_size, 'FontName', font_family);
+
+% Legend
+legend({'\Xi_1(k)', '\Xi_2(k)', '\Xi_3(k)', '\Xi_4(k)'}, ...
+    'FontSize', font_size, 'FontName', font_family,'Location', 'north', 'Orientation', 'horizontal');
 
 grid off;
-% set(gca, 'FontSize', font_size);
-axes('Position', [0.73 0.265 0.13 0.11]);
-box on;
-plot(k(zoomStart:zoomEnd), xi4(zoomStart:zoomEnd), 'm', 'LineWidth', 1.5);
-ylim([-0.05 0.05]);  % <-- added line
-set(gca, 'FontSize', zoomed_fontsize,'FontName',font_family);
+set(gca, 'FontSize', font_size, 'FontName', font_family);
+
+% === Zoomed Inset (for all agents in the same zoom window) ===
+axes('Position', [0.45 0.50 0.30 0.25]); % inset position
+box on; hold on;
+
+plot(k(zoomStart:zoomEnd), xi1(zoomStart:zoomEnd), 'b', 'LineWidth', 1.2);
+plot(k(zoomStart:zoomEnd), xi2(zoomStart:zoomEnd), 'r', 'LineWidth', 1.2);
+plot(k(zoomStart:zoomEnd), xi3(zoomStart:zoomEnd), 'g', 'LineWidth', 1.2);
+plot(k(zoomStart:zoomEnd), xi4(zoomStart:zoomEnd), 'm', 'LineWidth', 1.2);
+
+% ylim([-0.05 0.05]); % adjust depending on your data
+set(gca, 'FontSize', zoomed_fontsize, 'FontName', font_family);
+% title('Zoomed View', 'FontSize', zoomed_fontsize, 'FontName', font_family);
 
 
 
